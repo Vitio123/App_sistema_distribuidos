@@ -41,10 +41,11 @@ public class frmMenu extends javax.swing.JFrame {
         panelListarDatos = new javax.swing.JPanel();
         btnListarDatos = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         panelGestionarEmpresa = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,26 +158,32 @@ public class frmMenu extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Adobe Devanagari", 0, 20)); // NOI18N
         jLabel3.setText("<html><center>LISTAR DATOS</html>");
 
+        jLabel7.setText("jLabel7");
+
         javax.swing.GroupLayout panelListarDatosLayout = new javax.swing.GroupLayout(panelListarDatos);
         panelListarDatos.setLayout(panelListarDatosLayout);
         panelListarDatosLayout.setHorizontalGroup(
             panelListarDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelListarDatosLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelListarDatosLayout.createSequentialGroup()
                 .addContainerGap(93, Short.MAX_VALUE)
                 .addGroup(panelListarDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelListarDatosLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelListarDatosLayout.createSequentialGroup()
                         .addComponent(btnListarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127))))
+                        .addGap(127, 127, 127))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelListarDatosLayout.createSequentialGroup()
+                        .addGroup(panelListarDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(74, 74, 74))))
         );
         panelListarDatosLayout.setVerticalGroup(
             panelListarDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelListarDatosLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(btnListarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -198,34 +205,40 @@ public class frmMenu extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Adobe Devanagari", 0, 20)); // NOI18N
         jLabel2.setText("<html><center>GESTIONAR EMPRESA</html>");
 
-        jLabel7.setText("jLabel7");
+        jLabel10.setText("jLabel7");
 
         javax.swing.GroupLayout panelGestionarEmpresaLayout = new javax.swing.GroupLayout(panelGestionarEmpresa);
         panelGestionarEmpresa.setLayout(panelGestionarEmpresaLayout);
         panelGestionarEmpresaLayout.setHorizontalGroup(
             panelGestionarEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGestionarEmpresaLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addGroup(panelGestionarEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestionarEmpresaLayout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(125, 125, 125))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestionarEmpresaLayout.createSequentialGroup()
-                        .addGroup(panelGestionarEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66))))
+            .addGroup(panelGestionarEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGestionarEmpresaLayout.createSequentialGroup()
+                    .addGap(97, 97, 97)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                    .addGap(56, 56, 56)))
         );
         panelGestionarEmpresaLayout.setVerticalGroup(
             panelGestionarEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestionarEmpresaLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
+            .addGroup(panelGestionarEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestionarEmpresaLayout.createSequentialGroup()
+                    .addContainerGap(136, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(83, 83, 83)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -308,6 +321,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarPostulante;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
