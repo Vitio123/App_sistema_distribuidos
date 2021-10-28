@@ -17,7 +17,8 @@ public class app {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new frmRegistroPostulante().setVisible(true);
+        jdMenu objM = new jdMenu(null, true);
+        objM.setVisible(true);
     }
     
 }
