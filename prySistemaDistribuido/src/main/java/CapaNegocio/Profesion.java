@@ -19,7 +19,7 @@ public class Profesion extends EntidadProfesion{
     }
     
     public void consultarProfesion(){
-        
+        SQL = "select * from postulante where profesion_id = " + super.getProfesion_id();
     }
     
     public void insertarProfesion(){
