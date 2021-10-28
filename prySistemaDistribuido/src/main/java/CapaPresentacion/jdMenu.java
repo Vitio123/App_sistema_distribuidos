@@ -466,6 +466,7 @@ public class jdMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNotificacionesActionPerformed
     
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
+      new Manyari_boton_inicio().setVisible(true);
       
     }//GEN-LAST:event_btnInicioActionPerformed
 

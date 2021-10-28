@@ -11,6 +11,8 @@ package CapaPresentacion;
  */
 public class frmMenu extends javax.swing.JDialog {
 
+    String hor, min, seg;
+    Thread hiloHora;
     /**
      * Creates new form frmMenu
      */
