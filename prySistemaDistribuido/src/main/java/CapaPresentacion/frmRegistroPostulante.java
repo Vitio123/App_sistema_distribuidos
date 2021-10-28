@@ -537,7 +537,16 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSiguientePostulanteActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        System.exit(0);
+        try {
+            //System.exit(0);
+            CapaDatos.conexion obj= new CapaDatos.conexion();
+            ResultSet rs=obj.consultarBD("select * from dbo.Ubigeo");
+            while (rs.next()) {
+                System.err.println(rs.getString(2));
+            }obj.desconectarBD();
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnSiguienteIdiomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteIdiomasActionPerformed
