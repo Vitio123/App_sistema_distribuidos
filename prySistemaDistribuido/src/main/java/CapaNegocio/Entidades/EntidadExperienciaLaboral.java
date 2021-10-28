@@ -82,6 +82,9 @@ public class EntidadExperienciaLaboral {
         this.cargo = cargo;
     }
     
-    
+    @Override
+    public String toString(){
+        return cargo;
+    }
     
 }
