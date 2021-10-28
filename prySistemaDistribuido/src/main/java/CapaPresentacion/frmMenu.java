@@ -37,6 +37,7 @@ public class frmMenu extends javax.swing.JFrame {
         panelGestionarPostulante = new javax.swing.JPanel();
         btnModificarPostulante = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         panelListarDatos = new javax.swing.JPanel();
         btnListarDatos = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -109,6 +110,8 @@ public class frmMenu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Adobe Devanagari", 0, 20)); // NOI18N
         jLabel1.setText("<html><center>GESTIONAR POSTULANTE</html>");
 
+        jLabel7.setText("jLabel7");
+
         javax.swing.GroupLayout panelGestionarPostulanteLayout = new javax.swing.GroupLayout(panelGestionarPostulante);
         panelGestionarPostulante.setLayout(panelGestionarPostulanteLayout);
         panelGestionarPostulanteLayout.setHorizontalGroup(
@@ -116,11 +119,13 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(panelGestionarPostulanteLayout.createSequentialGroup()
                 .addGroup(panelGestionarPostulanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelGestionarPostulanteLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelGestionarPostulanteLayout.createSequentialGroup()
                         .addGap(128, 128, 128)
-                        .addComponent(btnModificarPostulante)))
+                        .addComponent(btnModificarPostulante))
+                    .addGroup(panelGestionarPostulanteLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(panelGestionarPostulanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
         panelGestionarPostulanteLayout.setVerticalGroup(
@@ -128,7 +133,9 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestionarPostulanteLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnModificarPostulante, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -162,7 +169,7 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelListarDatosLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnListarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -293,6 +300,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblFecha;
