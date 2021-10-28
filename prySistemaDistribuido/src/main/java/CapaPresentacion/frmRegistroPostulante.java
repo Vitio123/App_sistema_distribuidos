@@ -1,5 +1,7 @@
 package CapaPresentacion;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rodrigo Ruidias
@@ -546,6 +548,45 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         habilitarPanelExperiencia();
     }//GEN-LAST:event_btnSiguienteProfesionActionPerformed
     
+    private void RegistroPostulante(){
+        try {
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    private void RegistroIdioma(){
+        try {
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    private void RegistroProfesion(){
+        try {
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    private void RegistroExperiencia(){
+        try {
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    private void Limpiar(){
+        txtID.setEditable(false);
+        txtApellidoPaterno.setText("");
+        txtApellidoMaterno.setText("");
+        
+    }
+    
     private void habilitarPanelPostulante(){
         panelPostulante.setVisible(true);
         panelIdiomas.setVisible(false);
@@ -572,10 +613,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         panelIdiomas.setVisible(false);
         PanelProfesion.setVisible(false);        
         panelExperiencia.setVisible(true);
-    }
-    
-    private void RegistroPostulante(){
-        
     }
     
     /**
