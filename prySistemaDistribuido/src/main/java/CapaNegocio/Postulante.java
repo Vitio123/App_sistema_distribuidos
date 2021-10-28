@@ -19,10 +19,15 @@ public class Postulante extends EntidadPostulante {
         objC = new conexion();
     }
 
-    public void consultarPostulante() throws Exception {
+    public EntidadPostulante consultarPostulante() throws Exception {
         try {
+            EntidadPostulante objEP = null;
             SQL = "select * from postulante where postulante_id = " + super.getPostulante_id();
             rs = objC.consultarBD(SQL);
+            if (rs.next()) {
+                objEP = new EntidadPostulante();
+            }
+            return objEP;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
