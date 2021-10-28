@@ -65,4 +65,21 @@ public class Postulante extends EntidadPostulante {
         }
     }
 
+    public int verificarLogin(String dni, String contraseña) throws Exception {
+        int rpt=0;
+        try {
+            
+            SQL = "select * from postulante where numero_documento = '"+dni+"' and contraseña='"+contraseña+"'";
+            rs = objC.consultarBD(SQL);
+            if (rs.next()) {
+                rpt=1;
+            }objC.desconectarBD();
+           
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        return rpt;
+    }
+    
+
 }
