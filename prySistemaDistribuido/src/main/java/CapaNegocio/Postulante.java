@@ -4,6 +4,7 @@ import CapaDatos.conexion;
 import CapaNegocio.Entidades.EntidadPostulante;
 import java.sql.ResultSet;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,11 +23,23 @@ public class Postulante extends EntidadPostulante {
     public EntidadPostulante consultarPostulante() throws Exception {
         try {
             EntidadPostulante objEP = null;
-            SQL = "select * from postulante where postulante_id = " + super.getPostulante_id();
+            SQL = "select * from dbo.Postulante where postulante_id = " + super.getPostulante_id();
             rs = objC.consultarBD(SQL);
             if (rs.next()) {
                 objEP = new EntidadPostulante();
+                objEP.setPostulante_id(rs.getInt(1));
+                objEP.setTipo_documento_id(rs.getInt(2));
+                objEP.setNumero_documento(rs.getString(3));
+                objEP.setApellido_paterno(rs.getString(4));
+                objEP.setApellido_materno(rs.getString(5));
+                objEP.setNombres(rs.getString(6));
+                objEP.setUbigeo_id(rs.getInt(7));
+                objEP.setPais_id(rs.getInt(8));
+                objEP.setProfesion_categoria(rs.getInt(9));
+                objEP.setNumero_colegiatura(10);
+                objEP.setLink_foto(rs.getString(11));
             }
+            objC.desconectarBD();
             return objEP;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -35,7 +48,9 @@ public class Postulante extends EntidadPostulante {
 
     public void insertarPostulante() throws Exception {
         try {
-
+            SQL = "insert into dbo.Postulante values(" + super.getPostulante_id() + ", " + super.getTipo_documento_id() + ", '" + super.getNumero_documento() + "', '" + super.getApellido_paterno() + "', '" + super.getApellido_materno() + ", '" + super.getNombres() + "', " + super.getUbigeo_id() + ", " + super.getPais_id() + ", " + super.getNumero_colegiatura() + ", '" + super.getLink_foto() + "')";
+            objC.ejecutarBD(SQL);
+            objC.desconectarBD();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -43,7 +58,9 @@ public class Postulante extends EntidadPostulante {
 
     public void modificarPostulante() throws Exception {
         try {
-
+            SQL = "update dbo.Postulante set tipo_documento_id = " + super.getTipo_documento_id() + ", numero_documento =  '" + super.getNumero_documento() + "', apellido_paterno = '" + super.getApellido_paterno() + "', apellido_materno = '" + super.getApellido_materno() + "', nombres = '" + super.getNombres() + "', ubigeo_ubigeo_id = " + super.getUbigeo_id() + ", pais_pais_id = " + super.getPais_id() + ", numero_colegiatura = " + super.getNumero_colegiatura() + ", link_foto = '" + super.getLink_foto() + "' where postulante_id = " + super.getPostulante_id();
+            objC.ejecutarBD(SQL);
+            objC.desconectarBD();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -51,7 +68,9 @@ public class Postulante extends EntidadPostulante {
 
     public void eliminarPostulante() throws Exception {
         try {
-
+            SQL = "delete from dbo.Postulante where postulante_id = " + super.getPostulante_id();
+            objC.ejecutarBD(SQL);
+            objC.desconectarBD();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -59,13 +78,33 @@ public class Postulante extends EntidadPostulante {
 
     public void listarPostulante(JTable tblListado) throws Exception {
         try {
-
+            SQL = "select p.postulante_id, p.apellido_parterno + ' ' + p.apellido_materno as apellidos, p.nombres, p.numero_colegiatura, u.departamento, pa.nombre_pais from dbo.Postulante as p inner join dbo.Ubigeo as u on u.ubigeo_id = p.ubigeo_ubigeo_id inner join dbo.Pais as pa on pa.pais_id = p.pais_pais_id order by 2, 3 asc";
+            rs = objC.consultarBD(SQL);
+            
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("ID");
+            modelo.addColumn("Apellidos");
+            modelo.addColumn("Nombres");
+            modelo.addColumn("Colegiatura");
+            modelo.addColumn("Departamento");
+            modelo.addColumn("País");
+            
+            tblListado.setModel(modelo);
+            
+            while(rs.next()){
+                Object datos[] = new Object[modelo.getColumnCount()];
+                for (int i = 0; i < datos.length; i++) {
+                    datos[i] = rs.getString(i+1);
+                }
+                
+                modelo.addRow(datos);
+            }
+            
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
-
-    public int verificarLogin(String dni, String contraseña) throws Exception {
+  public int verificarLogin(String dni, String contraseña) throws Exception {
         int rpt=0;
         try {
             
@@ -80,6 +119,5 @@ public class Postulante extends EntidadPostulante {
         }
         return rpt;
     }
-    
 
 }
