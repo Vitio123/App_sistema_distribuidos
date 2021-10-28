@@ -86,12 +86,8 @@ public class conexion {
             sent = con.createStatement();
             sent.executeUpdate(strSQL);
         } catch (Exception e) {
-            throw new Exception ("Error al ejecutar consulta...");
-        } finally{
-            if(con!=null){
-                desconectarBD();
-            }
-        }
+            throw new Exception ("Error al ejecutar consulta..."+e);
+        } 
     }
     
     public void ejecutarBDTransacciones(String strSQL1, String strSQL2, String strSQL3,String strSQL4) throws Exception{
@@ -107,7 +103,7 @@ public class conexion {
             con.setAutoCommit(true);
         } catch (Exception e) {
             con.rollback();
-            throw new Exception("Error al ejecutar consultas...");
+            throw new Exception("Error al ejecutar consultas..."+e);
         }
     }
     
@@ -124,7 +120,7 @@ public class conexion {
             con.setAutoCommit(true);
         } catch (Exception e) {
             con.rollback();
-            throw new Exception("Error al ejecutar consultas...");
+            throw new Exception("Error al ejecutar consultas..."+e);
         }
     }
     
@@ -139,7 +135,7 @@ public class conexion {
             //Integer i= cs.getInt(1);
             return rs;
         } catch (Exception e) {
-            throw new Exception ("Error al ejecutar consulta con PA...");
+            throw new Exception ("Error al ejecutar consulta con PA..."+e);
         } 
     }
 
@@ -160,7 +156,7 @@ public class conexion {
         } catch (Exception e) {
             con.rollback();
             e.printStackTrace();
-            throw new Exception("Error al ejecutar consulta...");
+            throw new Exception("Error al ejecutar consulta..."+e);
             // throw new Exception(e.getMessage());
         } 
     } 

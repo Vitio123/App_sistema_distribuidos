@@ -13,9 +13,11 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     public frmRegistroPostulante() {
         initComponents();
         habilitarPanelPostulante();
+        this.setLocationRelativeTo(null);
     }
     
     public static String dni = "";
+    public static String contraseña = "";
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
