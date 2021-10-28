@@ -225,7 +225,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
                         rpt=objEmpresa.verificarLogin(documento, contraseña);
                     }
                     if(rpt==1){
-                        frmMenu obj=new frmMenu();
+                        jdMenu obj = new jdMenu(this, true);
                         obj.setVisible(true);
                         this.dispose();
                     }else{
