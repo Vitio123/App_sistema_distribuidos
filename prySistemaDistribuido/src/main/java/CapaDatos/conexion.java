@@ -13,134 +13,155 @@ import java.util.ArrayList;
  * @author Rodrigo Ruidias
  */
 public class conexion {
-    
-    private String driver, url, user, password;
+    private String driver,url,user,password;
     private Connection con;
-    private Statement sent;
+    private Statement sent=null;
     private CallableStatement cs;
 
+    //Constructor
     public conexion() {
-        this.driver = "";
-        this.url = "" + "";
-        this.user = "";
-        this.password = "";
+        this.driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        //String servidor="database-2.cfhzxl8ixjw6.us-west-1.rds.amazonaws.com";
+        String servidor="SQL5103.site4now.net";
+        this.url = "jdbc:sqlserver://"+servidor+":1433;databaseName=db_a7b1bc_proyectosd";
+        //this.user = "masteruser";
+        this.user = "db_a7b1bc_proyectosd_admin";
+        //this.password = "abc123456789";
+        this.password = "admin123456789";
         this.con = null;
     }
-
-    public void conectarBD() throws Exception {
-
-        try {
-
-            Class.forName(driver);
-            con = DriverManager.getConnection(url, user, password);
-
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new Exception("Error al conectar la BD");
-        }
-
+    public  void main(String[] args) throws Exception {
+       conectarBD(); 
     }
-
-    //Consultar estado de la conexion
+    //Conectar a BD
+    public void conectarBD() throws Exception{
+        try {
+            Class.forName(driver);
+            con=DriverManager.getConnection(url, user, password);
+            //System.err.println(con);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new Exception ("Error al conectar la BD..."+e);
+        }
+            
+    }
+    
+    //Consultar estado de la conexión
     public boolean getEstado() throws SQLException {
         return this.con.isClosed();
     }
-
+    
+    //07 Abril 2021
+    
     //Desconectar de la BD
-    public void desconectarBD() throws Exception {
-
+    public void desconectarBD() throws Exception{
         try {
             con.close();
         } catch (SQLException e) {
-            throw new Exception("Error al desconectar de la BD");
+            throw new Exception("Error al desconectar de la BD.");
         }
-
     }
-
-    public ResultSet consultarBD(String strSQL) throws Exception {
-        ResultSet rs = null;
+    
+    //Ejecutar consultas a la BD:  SELECT - Función
+    public ResultSet consultarBD(String strSQL) throws Exception{
+        ResultSet rs=null;
         try {
             conectarBD();
             sent = con.createStatement();
-            rs = sent.executeQuery(strSQL);
+            rs=sent.executeQuery(strSQL);
+            
             return rs;
+            
         } catch (Exception e) {
-            throw new Exception("Error al ejecutar consulta...");
-        } finally {
-            if (con != null) {
-                desconectarBD();
-            }
+            
+            throw new Exception ("Error al ejecutar consulta..."+e);
         }
+       
+        
     }
-
-    //Ejecutar inserta/elimina/modifica base de datos: INSERT, UPDATE y DELETE
-    public void ejecutarBD(String strSQL) throws Exception {
+    
+    //Ejecutar inserta/elimina/modifica base de datos: INSERT, UPDATE y DELETE - Procedimientos
+    public void ejecutarBD (String strSQL) throws Exception{
         try {
             conectarBD();
             sent = con.createStatement();
             sent.executeUpdate(strSQL);
         } catch (Exception e) {
-            throw new Exception("Error al ejecut ar consulta...");
-        } finally {
-            if (con != null) {
+            throw new Exception ("Error al ejecutar consulta...");
+        } finally{
+            if(con!=null){
                 desconectarBD();
             }
         }
     }
-
-    public void ejecutarBDTransacciones(ArrayList arregloConsultas) throws Exception {
+    
+    public void ejecutarBDTransacciones(String strSQL1, String strSQL2, String strSQL3,String strSQL4) throws Exception{
         try {
             conectarBD();
             con.setAutoCommit(false);
-            sent = con.createStatement();
-            for (Object consulta : arregloConsultas) {
-                sent.executeUpdate(String.valueOf(consulta));
+            sent=con.createStatement();
+            sent.executeUpdate(strSQL1);
+            sent.executeUpdate(strSQL2);
+            sent.executeUpdate(strSQL3);
+            sent.executeUpdate(strSQL4);
+            con.commit();
+            con.setAutoCommit(true);
+        } catch (Exception e) {
+            con.rollback();
+            throw new Exception("Error al ejecutar consultas...");
+        }
+    }
+    
+    //Ejecuta un arreglo de sentencias (cadenas)
+    public void ejecutarBDTransacciones(ArrayList arregloConsultas) throws Exception{
+        try {
+            conectarBD();
+            con.setAutoCommit(false);
+            sent=con.createStatement();
+            for(Object consulta:arregloConsultas){
+                sent.executeUpdate((String)consulta);
             }
             con.commit();
             con.setAutoCommit(true);
         } catch (Exception e) {
             con.rollback();
-            throw new Exception(e.getMessage());
-        } finally {
-            if (con != null) {
-                desconectarBD();
-            }
+            throw new Exception("Error al ejecutar consultas...");
         }
     }
-
-    public ResultSet consultarBD_PA(String strSQL) throws Exception {
-        ResultSet rs = null;
+    
+    public ResultSet consultarBD_PA(String strSQL) throws Exception{
+        ResultSet rs=null;
         try {
             conectarBD();
             cs = con.prepareCall(strSQL);
             rs = cs.executeQuery();
+            //cs.setInt(1,55);
+            //cs.registerOutParameter(1, java.sql.Types.INTEGER);
+            //Integer i= cs.getInt(1);
             return rs;
         } catch (Exception e) {
-            throw new Exception("Error al ejecutar consulta con PA..." + " - " + e.getMessage() + " - " + "Consulta");
-        } finally {
-            if (con != null) {
-                desconectarBD();
-                //cs.close();
-            }
-        }
+            throw new Exception ("Error al ejecutar consulta con PA...");
+        } 
     }
 
-    public void ejecutarBD_PA(String strSQL) throws Exception {
-        try {
-            conectarBD();
-            cs = con.prepareCall(strSQL);
-            cs.executeUpdate();
-        } catch (Exception e) {
-            throw new Exception("Error al ejecutar consulta con PA..." + " - " + e.getMessage());
-        } finally {
-            if (con != null) {
-                desconectarBD();
-                //cs.close();
-            }
-        }
-    }
-    
-    public Connection getCon(){
+   public Connection getCon() {
         return con;
     }
-    
+   
+      public void ejecutarBDTransaccionesRM(String ...consultas) throws Exception {
+        try {
+            conectarBD();
+            con.setAutoCommit(false);
+            sent = con.createStatement();
+            for (Object consulta : consultas) {
+                sent.executeUpdate((String) consulta);
+            }
+            con.commit();
+            con.setAutoCommit(true);
+        } catch (Exception e) {
+            con.rollback();
+            e.printStackTrace();
+            throw new Exception("Error al ejecutar consulta...");
+            // throw new Exception(e.getMessage());
+        } 
+    } 
 }
