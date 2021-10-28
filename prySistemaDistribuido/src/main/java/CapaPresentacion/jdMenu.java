@@ -5,21 +5,56 @@
  */
 package CapaPresentacion;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author Roberto Montero
  */
-public class jdMenu extends javax.swing.JDialog {
-
+public class jdMenu extends javax.swing.JDialog implements Runnable{
+    
+    String hor, min, seg;
+    Thread hiloHora;
+    
     /**
      * Creates new form jdMenu
      */
-    public jdMenu(java.awt.Frame parent, boolean modal) {
+    public jdMenu(java.awt.Frame parent, boolean modal){
         super(parent, modal);
         initComponents();
         setTitle("MENÚ DE VIZUALISACIÓN");
         setLocationRelativeTo(null);
+        lblFecha.setText(obtenerFecha());
+        hiloHora = new Thread((Runnable) this);
+        hiloHora.start();
     }
+    
+    public static String obtenerFecha() {
+        Date fechaActual = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
+        return formatofecha.format(fechaActual);
+    }
+
+    public void obtenerHora() {
+        Calendar calendario = new GregorianCalendar();
+        Date horaActual = new Date();
+        calendario.setTime(horaActual);
+        hor = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY) : "0" + calendario.get(Calendar.HOUR_OF_DAY);
+        min = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE) : "0" + calendario.get(Calendar.MINUTE);
+        seg = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
+    }
+
+    public void run() {
+        Thread current = Thread.currentThread();
+        while (current == hiloHora) {
+            obtenerHora();
+            lblHora.setText(hor + ":" + min + ":" + seg);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -187,7 +222,7 @@ public class jdMenu extends javax.swing.JDialog {
 
         btnModificarPostulante.setBackground(new java.awt.Color(0, 117, 196));
         btnModificarPostulante.setFont(new java.awt.Font("Arial Black", 1, 17)); // NOI18N
-        btnModificarPostulante.setForeground(new java.awt.Color(17, 17, 38));
+        btnModificarPostulante.setForeground(new java.awt.Color(255, 255, 255));
         btnModificarPostulante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modificar_rm.png"))); // NOI18N
         btnModificarPostulante.setText("MODIFICAR");
         btnModificarPostulante.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -198,6 +233,7 @@ public class jdMenu extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Adobe Devanagari", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 117, 196));
         jLabel1.setText("<html><center>GESTIONAR POSTULANTE</html>");
 
         lbldescpost.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -249,7 +285,7 @@ public class jdMenu extends javax.swing.JDialog {
 
         jButton1.setBackground(new java.awt.Color(0, 117, 196));
         jButton1.setFont(new java.awt.Font("Arial Black", 1, 17)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(17, 17, 38));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modificar_rm.png"))); // NOI18N
         jButton1.setText("MODIFICAR");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -260,6 +296,7 @@ public class jdMenu extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Adobe Devanagari", 1, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 117, 196));
         jLabel2.setText("<html><center>GESTIONAR EMPRESA</html>");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -311,7 +348,7 @@ public class jdMenu extends javax.swing.JDialog {
 
         btnListarDatos.setBackground(new java.awt.Color(0, 117, 196));
         btnListarDatos.setFont(new java.awt.Font("Arial Black", 1, 17)); // NOI18N
-        btnListarDatos.setForeground(new java.awt.Color(17, 17, 38));
+        btnListarDatos.setForeground(new java.awt.Color(255, 255, 255));
         btnListarDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar_rm.png"))); // NOI18N
         btnListarDatos.setText("LISTAR");
         btnListarDatos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -322,6 +359,7 @@ public class jdMenu extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Adobe Devanagari", 1, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 117, 196));
         jLabel3.setText("<html><center>LISTAR DATOS</html>");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -396,10 +434,6 @@ public class jdMenu extends javax.swing.JDialog {
 
         jLabel8.setText("HORA:");
 
-        lblHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        lblFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -466,7 +500,7 @@ public class jdMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNotificacionesActionPerformed
     
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-      new Manyari_boton_inicio().setVisible(true);
+      
       
     }//GEN-LAST:event_btnInicioActionPerformed
 
