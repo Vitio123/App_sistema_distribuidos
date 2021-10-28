@@ -98,8 +98,8 @@ public class Postulante extends EntidadPostulante {
                 }
                 
                 modelo.addRow(datos);
-            }
-            
+            }            
+            objC.desconectarBD();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
