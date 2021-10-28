@@ -5,6 +5,8 @@
  */
 package CapaPresentacion;
 
+import CapaDatos.conexion;
+
 /**
  *
  * @author Rodrigo Ruidias
@@ -15,7 +17,7 @@ public class app {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        new frmRegistroPostulante().setVisible(true);
     }
     
 }

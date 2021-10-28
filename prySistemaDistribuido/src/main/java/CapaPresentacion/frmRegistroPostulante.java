@@ -1,5 +1,6 @@
 package CapaPresentacion;
 
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
