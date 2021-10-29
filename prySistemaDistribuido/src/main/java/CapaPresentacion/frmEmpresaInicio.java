@@ -11,12 +11,12 @@ import javax.swing.JFrame;
  *
  * @author nickb
  */
-public class Manyari_boton_inicio extends javax.swing.JFrame {
+public class frmEmpresaInicio extends javax.swing.JFrame {
 
     /**
      * Creates new form Manyari_boton_buscar
      */
-    public Manyari_boton_inicio() {
+    public frmEmpresaInicio() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -177,7 +177,7 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(17, 17, 38)));
 
-        jLabel4.setText("POSTULANTE:");
+        jLabel4.setText("EMPRESA:");
 
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -195,10 +195,10 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,15 +226,15 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/postulante.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/empresa_rm.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Usuario");
+        jLabel2.setText("Empresa");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Descripcion del usuario");
+        jTextArea1.setText("Descripcion de la empresa");
         jScrollPane2.setViewportView(jTextArea1);
 
         btnModificarPostulante.setBackground(new java.awt.Color(0, 117, 196));
@@ -292,7 +292,7 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Empresa", "Descripción ", "Clasificación", "Descripción"
+                "Postulante", "Especialidad ", "Curriculum"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -300,7 +300,7 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
         btnModificarPostulante1.setBackground(new java.awt.Color(0, 117, 196));
         btnModificarPostulante1.setFont(new java.awt.Font("Arial Black", 1, 17)); // NOI18N
         btnModificarPostulante1.setForeground(new java.awt.Color(17, 17, 38));
-        btnModificarPostulante1.setText("POSTULAR");
+        btnModificarPostulante1.setText("CONTACTAR");
         btnModificarPostulante1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnModificarPostulante1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,7 +366,7 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarPostulante1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         Manyari_boton_buscar obj= new Manyari_boton_buscar();
+         frmEmpresaBusqueda obj= new frmEmpresaBusqueda();
         
 
         obj.setVisible(true);
@@ -374,7 +374,7 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-         Manyari_boton_notificaciones obj= new Manyari_boton_notificaciones();
+         frmEmpresaNotificaciones obj= new frmEmpresaNotificaciones();
         
 
         obj.setVisible(true);
@@ -398,21 +398,23 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Manyari_boton_inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmEmpresaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Manyari_boton_inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmEmpresaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Manyari_boton_inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmEmpresaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Manyari_boton_inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmEmpresaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Manyari_boton_inicio().setVisible(true);
+                new frmEmpresaInicio().setVisible(true);
             }
         });
     }

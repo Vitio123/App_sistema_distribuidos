@@ -112,7 +112,7 @@ public class Postulante extends EntidadPostulante {
             SQL = "select * from postulante where numero_documento = '"+dni+"' and contraseña='"+contraseña+"'";
             rs = objC.consultarBD(SQL);
             if (rs.next()) {
-                rpt=1;
+                rpt=rs.getInt(1);
             }objC.desconectarBD();
            
         } catch (Exception e) {
