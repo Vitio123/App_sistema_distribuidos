@@ -367,18 +367,12 @@ public class Manyari_boton_inicio extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
          Manyari_boton_buscar obj= new Manyari_boton_buscar();
-        
-
         obj.setVisible(true);
-        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
          Manyari_boton_notificaciones obj= new Manyari_boton_notificaciones();
-        
-
-        obj.setVisible(true);
-        dispose();
+       obj.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
