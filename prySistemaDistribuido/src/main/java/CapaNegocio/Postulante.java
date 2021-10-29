@@ -50,12 +50,13 @@ public class Postulante extends EntidadPostulante {
         try {
             SQL = "insert into dbo.Postulante(tipo_documento_id, numero_documento, apellido_parterno, apellido_materno, nombres, ubigeo_ubigeo_id, pais_pais_id, categoria_profesion_categoria, numero_colegiatura, link_foto, contraseña) values(" + super.getTipo_documento_id() + ", '" + super.getNumero_documento() + "', '" + super.getApellido_paterno() + "', '" + super.getApellido_materno() + "', '" + super.getNombres() + "', " + super.getUbigeo_id() + ", " + super.getPais_id() + ", " + super.getProfesion_categoria() + ", " + super.getNumero_colegiatura() + ", '" + super.getLink_foto() + "', '" + super.getContra() + "')";
             objC.ejecutarBD(SQL);
-            rs = objC.consultarBD("select SCOPE_IDENTITY()");
+            String SQL2 = "select IDENT_CURRENT('dbo.Postulante') [postulante_id]";
+            rs = objC.consultarBD(SQL2);
             if (rs.next()) {
                 return rs.getInt(1);
             }
             objC.desconectarBD();
-            return 0;
+            return -1;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

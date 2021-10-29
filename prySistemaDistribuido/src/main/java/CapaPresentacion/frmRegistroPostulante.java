@@ -913,6 +913,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                     objI.setIdioma(tblListadoIdioma.getValueAt(i, 0).toString());
                     objI.setNivel(tblListadoIdioma.getValueAt(i, 1).toString());
                     objI.setLink_archivo(tblListadoIdioma.getValueAt(i, 2).toString());
+                    System.out.println("El id del postulante: " + idpostulante);
                     objI.setPostulante_id(idpostulante);
                     objI.insertarIdioma();
                     JOptionPane.showMessageDialog(this, "Se registró el idioma");
