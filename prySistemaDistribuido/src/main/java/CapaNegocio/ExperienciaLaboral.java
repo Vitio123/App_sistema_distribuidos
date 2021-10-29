@@ -3,8 +3,6 @@ package CapaNegocio;
 import CapaDatos.conexion;
 import CapaNegocio.Entidades.EntidadExperienciaLaboral;
 import java.sql.ResultSet;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *

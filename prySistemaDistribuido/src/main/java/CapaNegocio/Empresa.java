@@ -3,6 +3,7 @@ package CapaNegocio;
 import CapaDatos.conexion;
 import CapaNegocio.Entidades.EntidadEmpresa;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -58,6 +59,27 @@ public class Empresa extends EntidadEmpresa{
                 modelo.addRow(datos);
             }            
             objC.desconectarBD();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
+    public ArrayList<EntidadEmpresa> llenarEmpresas() throws Exception{
+        try {
+            ArrayList<EntidadEmpresa> empresas = new ArrayList<EntidadEmpresa>();
+            SQL = "select * from dbo.Empresa";
+            rs = objC.consultarBD(SQL);
+            while(rs.next()){
+                EntidadEmpresa objEE = new EntidadEmpresa();
+                objEE.setEmpresa_id(rs.getInt(1));
+                objEE.setNombre_empresa(rs.getString(2));
+                objEE.setTipo_empresa(rs.getString(3));
+                objEE.setRuc(rs.getString(4));
+                objEE.setPais_id(rs.getInt(5));
+                empresas.add(objEE);
+            }
+            objC.desconectarBD();
+            return empresas;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
