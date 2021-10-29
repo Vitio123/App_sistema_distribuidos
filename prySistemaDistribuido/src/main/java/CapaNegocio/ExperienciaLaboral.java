@@ -55,6 +55,12 @@ public class ExperienciaLaboral extends EntidadExperienciaLaboral {
             String anoS = fechasalida.substring(6, 10);
             String fechaSal = anoS + "-" + mesS + "-" + diaS;
             
+            System.out.println(fechaIni);
+            System.out.println(fechaSal);
+            System.out.println(super.getLink_archivo());
+            System.out.println(super.getEmpresa_id());
+            System.out.println(super.getCargo());
+            
             SQL = "insert into dbo.Experiencia_laboral(fecha_inicio, fecha_final, link_archivo, postulante_postulante_id, empresa_empresa_id, cargo) values('" + fechaIni + "', '" + fechaSal + "', '" + super.getLink_archivo() + "', " + super.getPostulante_id() + ", " + super.getEmpresa_id() + ", '" + super.getCargo() + "')";
             objC.ejecutarBD(SQL);
             objC.desconectarBD();
