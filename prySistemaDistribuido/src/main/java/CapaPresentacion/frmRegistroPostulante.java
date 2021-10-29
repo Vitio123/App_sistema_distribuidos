@@ -9,16 +9,15 @@ import CapaNegocio.Entidades.EntidadPais;
 import CapaNegocio.Entidades.EntidadTipoDocumento;
 import CapaNegocio.Entidades.EntidadUniversidad;
 import CapaNegocio.GradoAcademico;
+import CapaNegocio.Idioma;
 import CapaNegocio.Pais;
 import CapaNegocio.Postulante;
 import CapaNegocio.TipoDocumento;
 import CapaNegocio.Ubigeo;
 import CapaNegocio.Universidad;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Base64;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -841,13 +840,16 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                 
                 objU = new Ubigeo();
                 objU.setDepartamento(cboDepartamento.getSelectedItem().toString());
-                objU.setProvincia(cboDepartamento.getSelectedItem().toString());
+                objU.setProvincia(cboProvincia.getSelectedItem().toString());
                 objU.setDistrito(cboDistrito.getSelectedItem().toString());
                 int idU = objU.buscarUbigeo();
                 objP.setUbigeo_id(idU);
                 
                 EntidadPais pais = (EntidadPais) cboPais.getSelectedItem();
                 objP.setPais_id(pais.getPais_id());
+                
+                EntidadCategoriaProfesion categoria = (EntidadCategoriaProfesion) cboProfesionPostulante.getSelectedItem();
+                objP.setProfesion_categoria(categoria.getCategoria_id());
                 
                 objP.setNumero_colegiatura(Integer.parseInt(txtColegiatura.getText()));
                 
@@ -857,7 +859,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                 
                 objP.insertarPostulante();
                 JOptionPane.showMessageDialog(this, "Se registró el postulante");
-                Limpiar();
 
             }
         } catch (Exception e) {
@@ -867,7 +868,15 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
     private void RegistroIdioma() {
         try {
-
+            if (tblListado.getRowCount() > 0) {
+                for (int i = 0; i < tblListado.getSelectedRowCount(); i++) {
+                Idioma objI = new Idioma();
+                //objI.setIdioma_id(tblListado);
+            }
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Debe agregar al menos un idioma");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -956,15 +965,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
             ext = s.substring(i + 1).toLowerCase();
         }
         return ext;
-    }
-
-    private void Limpiar() {
-        txtID.setEditable(false);
-        txtApellidoPaterno.setText("");
-        txtApellidoMaterno.setText("");
-        txtNombres.setText("");
-        txtColegiatura.setText("");
-        llenarCombos();
     }
 
     private void habilitarPanelPostulante() {

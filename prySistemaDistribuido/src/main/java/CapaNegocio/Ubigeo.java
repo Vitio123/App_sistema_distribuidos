@@ -21,7 +21,7 @@ public class Ubigeo extends EntidadUbigeo{
     
     public int buscarUbigeo() throws Exception{
         try {
-            SQL = "select * from dbo.Ubigeo where departamento = '" + super.getDepartamento() + "' and provincia = '" + super.getProvincia() + "' and distrito = '" + super.getDistrito() + "'";
+            SQL = "select ubigeo_id from dbo.Ubigeo where departamento = '" + super.getDepartamento() + "' and provincia = '" + super.getProvincia() + "' and distrito = '" + super.getDistrito() + "'";
             rs = objC.consultarBD(SQL);
             if (rs.next()) {
                 return rs.getInt(1);
