@@ -6,6 +6,9 @@
 package CapaPresentacion;
 
 import CapaNegocio.Empresa;
+import CapaNegocio.Entidades.EntidadPostulante;
+import CapaNegocio.Postulante;
+import static CapaPresentacion.jdMenuEm.id_postulante;
 import static CapaPresentacion.jdMenuPost.obtenerFecha;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -79,7 +82,7 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        txtPostulanteSesion = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         lblHora1 = new javax.swing.JLabel();
@@ -180,9 +183,7 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
                 .addContainerGap())
         );
 
-        jLabel7.setText("USUARIO:");
-
-        jLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel7.setText("POSTULANTE:");
 
         jLabel10.setText("FECHA:");
 
@@ -194,10 +195,10 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addComponent(txtPostulanteSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,7 +217,7 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
                     .addComponent(lblFecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPostulanteSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                         .addComponent(lblHora1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -262,6 +263,7 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
            listarEmpresa();
+           cargarDatosPostulante();
     }//GEN-LAST:event_formWindowOpened
 
     public void listarEmpresa(){
@@ -271,6 +273,18 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
    }
+    
+    private void cargarDatosPostulante(){
+        try {
+            Postulante objPostulante = new Postulante();
+            objPostulante.setPostulante_id(id_postulante);
+            EntidadPostulante entidadPostulante = objPostulante.consultarPostulante();
+            txtPostulanteSesion.setText(entidadPostulante.getNombres()+" "+entidadPostulante.getApellido_paterno()+
+                    " "+entidadPostulante.getApellido_materno());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
     
     public void busquedaFiltradaEmpresaPorNombre(String busqueda){
         
@@ -387,7 +401,6 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
@@ -395,5 +408,6 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
     private javax.swing.JLabel lblHora1;
     private javax.swing.JTable tblEmpresa;
     private javax.swing.JTextField txtBusqueda;
+    private javax.swing.JLabel txtPostulanteSesion;
     // End of variables declaration//GEN-END:variables
 }

@@ -240,8 +240,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
                             frmEmpresaInicio.idPostulante=rpt;
                             frmEmpresaInicio obj = new frmEmpresaInicio();
                             obj.setVisible(true);
-                        }
-                        
+                        }        
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(null,"Datos incorectos, intente nuevamente","error",  JOptionPane.ERROR_MESSAGE);
