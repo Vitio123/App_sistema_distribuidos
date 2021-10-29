@@ -1,5 +1,4 @@
-# App_sistema_distribuidos
-SISTEMA DE CONTRATACIÓN DE EMPLEOS
+# SISTEMA DE CONTRATACIÓN DE EMPLEOS
 
 We developed a project for recruitment by companies and job search as an applicant. The development was done in Java and SQL Server to be later exported to desktop and web. 
 
