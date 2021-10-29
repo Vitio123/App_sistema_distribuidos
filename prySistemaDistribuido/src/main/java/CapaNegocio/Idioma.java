@@ -33,6 +33,7 @@ public class Idioma extends EntidadIdioma {
                 objEI.setLink_archivo(rs.getString(4));
                 objEI.setPostulante_id(rs.getInt(5));
             }
+            objC.desconectarBD();
             return objEI;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -41,7 +42,7 @@ public class Idioma extends EntidadIdioma {
 
     public void insertarIdioma() throws Exception {
         try {
-            SQL = "insert into dbo.Idiomas_postulante values(" + super.getIdioma_id() + ", '" + super.getIdioma() + "', '" + super.getNivel() + "', '" + super.getLink_archivo() + "', " + super.getPostulante_id() + ")";
+            SQL = "insert into dbo.Idiomas_postulante(idioma, nivel, link_archivo, postulante_postulante_id) values('" + super.getIdioma() + "', '" + super.getNivel() + "', '" + super.getLink_archivo() + "', " + super.getPostulante_id() + ")";
             objC.ejecutarBD(SQL);
             objC.desconectarBD();
         } catch (Exception e) {

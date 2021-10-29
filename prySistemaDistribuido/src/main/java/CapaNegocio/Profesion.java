@@ -44,7 +44,7 @@ public class Profesion extends EntidadProfesion {
 
     public void insertarProfesion() throws Exception {
         try {
-            SQL = "insert into dbo.Postulante_profesion values(" + super.getProfesion_id() + ", '" + super.getFecha_obtencion() + "', " + super.getCategoria_profesion_id() + ", " + super.getPostulante_id() + ", " + super.getUniversidad_id() + ", '" + super.getDescripcion_formal() + "', " + super.getGrado_academico_id() + ", '" + super.getUrl_archivo() + "')";
+            SQL = "insert into dbo.Postulante_profesion(fecha_obtencion, categoria_profesion_categoria, postulante_postulante_id, universidad_universidad_id, descripcion_formal, grado_academico_grado_id, url_archivo) values('" + super.getFecha_obtencion() + "', " + super.getCategoria_profesion_id() + ", " + super.getPostulante_id() + ", " + super.getUniversidad_id() + ", '" + super.getDescripcion_formal() + "', " + super.getGrado_academico_id() + ", '" + super.getUrl_archivo() + "')";
             objC.ejecutarBD(SQL);
             objC.desconectarBD();
         } catch (Exception e) {
