@@ -12,6 +12,7 @@ import CapaNegocio.GradoAcademico;
 import CapaNegocio.Idioma;
 import CapaNegocio.Pais;
 import CapaNegocio.Postulante;
+import CapaNegocio.Profesion;
 import CapaNegocio.TipoDocumento;
 import CapaNegocio.Ubigeo;
 import CapaNegocio.Universidad;
@@ -55,6 +56,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
     public String imagenselect = "";
     public String archivoIdiomaselect = "";
+    public String archivoProfesionselect = "";
 
     DefaultTableModel modeloIdioma = new DefaultTableModel();
 
@@ -95,7 +97,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         btnArchivoIdioma = new javax.swing.JButton();
-        btnVerIdioma = new javax.swing.JButton();
         cboIdioma = new javax.swing.JComboBox<>();
         cboNivel = new javax.swing.JComboBox<>();
         btnSiguienteIdiomas = new javax.swing.JButton();
@@ -117,7 +118,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         btnSiguienteProfesion = new javax.swing.JButton();
         btnArchivoProfesion = new javax.swing.JButton();
-        btnVerProfesion = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         panelExperiencia = new javax.swing.JPanel();
@@ -387,10 +387,11 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         btnArchivoIdioma.setBackground(new java.awt.Color(0, 117, 196));
         btnArchivoIdioma.setForeground(new java.awt.Color(255, 255, 255));
         btnArchivoIdioma.setText("Seleccionar archivo");
-
-        btnVerIdioma.setBackground(new java.awt.Color(0, 117, 196));
-        btnVerIdioma.setForeground(new java.awt.Color(255, 255, 255));
-        btnVerIdioma.setText("Ver");
+        btnArchivoIdioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArchivoIdiomaActionPerformed(evt);
+            }
+        });
 
         cboIdioma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingles", "Español", "Italiano", "Japones", "Alemán" }));
 
@@ -437,35 +438,36 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         panelIdiomas.setLayout(panelIdiomasLayout);
         panelIdiomasLayout.setHorizontalGroup(
             panelIdiomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(panelIdiomasLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel12)
-                .addGap(22, 22, 22)
-                .addComponent(cboIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelIdiomasLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel13)
-                .addGap(32, 32, 32)
-                .addComponent(cboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelIdiomasLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel14)
-                .addGap(18, 18, 18)
-                .addComponent(btnArchivoIdioma)
-                .addGap(6, 6, 6)
-                .addComponent(btnVerIdioma))
-            .addGroup(panelIdiomasLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelIdiomasLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(btnAgregarIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnQuitarIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelIdiomasLayout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(btnSiguienteIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelIdiomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelIdiomasLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel12)
+                        .addGap(22, 22, 22)
+                        .addComponent(cboIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelIdiomasLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel13)
+                        .addGap(32, 32, 32)
+                        .addComponent(cboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelIdiomasLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnArchivoIdioma))
+                    .addGroup(panelIdiomasLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelIdiomasLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(btnAgregarIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnQuitarIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelIdiomasLayout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(btnSiguienteIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34))
         );
         panelIdiomasLayout.setVerticalGroup(
             panelIdiomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,8 +490,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                     .addGroup(panelIdiomasLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel14))
-                    .addComponent(btnArchivoIdioma)
-                    .addComponent(btnVerIdioma))
+                    .addComponent(btnArchivoIdioma))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
@@ -538,10 +539,11 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         btnArchivoProfesion.setBackground(new java.awt.Color(0, 117, 196));
         btnArchivoProfesion.setForeground(new java.awt.Color(255, 255, 255));
         btnArchivoProfesion.setText("Seleccionar archivo");
-
-        btnVerProfesion.setBackground(new java.awt.Color(0, 117, 196));
-        btnVerProfesion.setForeground(new java.awt.Color(255, 255, 255));
-        btnVerProfesion.setText("Ver");
+        btnArchivoProfesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArchivoProfesionActionPerformed(evt);
+            }
+        });
 
         jLabel20.setText("Archivo:");
 
@@ -554,7 +556,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         PanelProfesion.setLayout(PanelProfesionLayout);
         PanelProfesionLayout.setHorizontalGroup(
             PanelProfesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(PanelProfesionLayout.createSequentialGroup()
                 .addGroup(PanelProfesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelProfesionLayout.createSequentialGroup()
@@ -573,12 +575,9 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                                 .addComponent(cboUniversidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cboProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtFechaObtencion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelProfesionLayout.createSequentialGroup()
-                                .addGroup(PanelProfesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cboGradoA, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnArchivoProfesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnVerProfesion))))
+                            .addGroup(PanelProfesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cboGradoA, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnArchivoProfesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(PanelProfesionLayout.createSequentialGroup()
                         .addGap(166, 166, 166)
                         .addComponent(btnSiguienteProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -611,8 +610,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelProfesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(btnArchivoProfesion)
-                    .addComponent(btnVerProfesion))
+                    .addComponent(btnArchivoProfesion))
                 .addGap(18, 18, 18)
                 .addComponent(btnSiguienteProfesion)
                 .addGap(101, 101, 101))
@@ -775,7 +773,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
     private void btnSiguientePostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguientePostulanteActionPerformed
         RegistroPostulante();
-        habilitarPanelIdiomas();
     }//GEN-LAST:event_btnSiguientePostulanteActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
@@ -784,11 +781,11 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
     private void btnSiguienteIdiomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteIdiomasActionPerformed
         RegistroIdioma();
-        habilitarPanelProfesion();
     }//GEN-LAST:event_btnSiguienteIdiomasActionPerformed
 
     private void btnSiguienteProfesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteProfesionActionPerformed
-        habilitarPanelExperiencia();
+        RegistroProfesion();
+        
     }//GEN-LAST:event_btnSiguienteProfesionActionPerformed
 
     private void cboDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboDepartamentoItemStateChanged
@@ -840,12 +837,17 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerFotoActionPerformed
 
     private void btnAgregarIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarIdiomaActionPerformed
-        Object datos[] = new Object[3];
+        String datos[] = new String[3];
         datos[0] = cboIdioma.getSelectedItem().toString();
         datos[1] = cboNivel.getSelectedItem().toString();
         datos[2] = archivoIdiomaselect;
-        modeloIdioma.addRow(datos);
-        tblListadoIdioma.setModel(modeloIdioma);
+
+        if (datos[2].isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione el archivo");
+        } else {
+            modeloIdioma.addRow(datos);
+            tblListadoIdioma.setModel(modeloIdioma);
+        }
 
     }//GEN-LAST:event_btnAgregarIdiomaActionPerformed
 
@@ -859,6 +861,14 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un idioma");
         }
     }//GEN-LAST:event_btnQuitarIdiomaActionPerformed
+
+    private void btnArchivoIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoIdiomaActionPerformed
+        grabarArchivo();
+    }//GEN-LAST:event_btnArchivoIdiomaActionPerformed
+
+    private void btnArchivoProfesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoProfesionActionPerformed
+        grabarArchivoProfesion();
+    }//GEN-LAST:event_btnArchivoProfesionActionPerformed
 
     private void RegistroPostulante() {
         try {
@@ -898,6 +908,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
                 idpostulante = objP.insertarPostulante();
                 JOptionPane.showMessageDialog(this, "Se registró el postulante");
+                habilitarPanelIdiomas();
 
             }
         } catch (Exception e) {
@@ -913,10 +924,10 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                     objI.setIdioma(tblListadoIdioma.getValueAt(i, 0).toString());
                     objI.setNivel(tblListadoIdioma.getValueAt(i, 1).toString());
                     objI.setLink_archivo(tblListadoIdioma.getValueAt(i, 2).toString());
-                    System.out.println("El id del postulante: " + idpostulante);
                     objI.setPostulante_id(idpostulante);
                     objI.insertarIdioma();
                     JOptionPane.showMessageDialog(this, "Se registró el idioma");
+                    habilitarPanelProfesion();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Debe agregar al menos un idioma");
@@ -928,8 +939,29 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
     private void RegistroProfesion() {
         try {
-            if (txtFechaObtencion.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Rellene todos los campos");
+            if (txtFechaObtencion.getText().isEmpty() || archivoProfesionselect.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Rellene todos los campos y seleccione el archivo");
+            } else {
+                Profesion objPro = new Profesion();
+
+                EntidadCategoriaProfesion categoria = (EntidadCategoriaProfesion) cboProfesion.getSelectedItem();
+                objPro.setCategoria_profesion_id(categoria.getCategoria_id());
+
+                objPro.setPostulante_id(idpostulante);
+
+                EntidadUniversidad universidad = (EntidadUniversidad) cboUniversidad.getSelectedItem();
+                objPro.setUniversidad_id(universidad.getUniversidad_id());
+
+                objPro.setDescripcion_formal(txtDescripcion.getText());
+
+                EntidadGradoAcademico grado = (EntidadGradoAcademico) cboGradoA.getSelectedItem();
+                objPro.setGrado_academico_id(grado.getGrado_id());
+
+                objPro.setUrl_archivo(archivoProfesionselect);
+                objPro.insertarProfesion(txtFechaObtencion.getText());
+                JOptionPane.showMessageDialog(this, "Se registró la profesion");
+                habilitarPanelExperiencia();
+
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -1008,6 +1040,18 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
             StringBuilder path = new StringBuilder();
             path.append(imagen.getAbsolutePath());
             archivoIdiomaselect = path.toString();
+        }
+
+    }
+
+    private void grabarArchivoProfesion() {
+        JFileChooser archivoseleccionado = new JFileChooser();
+        int seleccion = archivoseleccionado.showOpenDialog(null);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File imagen = archivoseleccionado.getSelectedFile();
+            StringBuilder path = new StringBuilder();
+            path.append(imagen.getAbsolutePath());
+            archivoProfesionselect = path.toString();
         }
 
     }
@@ -1110,8 +1154,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguienteProfesion;
     private javax.swing.JButton btnVerEL;
     private javax.swing.JButton btnVerFoto;
-    private javax.swing.JButton btnVerIdioma;
-    private javax.swing.JButton btnVerProfesion;
     private javax.swing.JComboBox<String> cboDepartamento;
     private javax.swing.JComboBox<String> cboDistrito;
     private javax.swing.JComboBox<String> cboEmpresa;

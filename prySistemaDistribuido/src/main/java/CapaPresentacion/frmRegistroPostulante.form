@@ -440,40 +440,43 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLabel3" min="-2" pref="466" max="-2" attributes="0"/>
               <Group type="102" attributes="0">
-                  <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
-                  <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
-                  <Component id="cboIdioma" min="-2" pref="210" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
-                  <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
-                  <Component id="cboNivel" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
-                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                  <Component id="btnArchivoIdioma" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="btnVerIdioma" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="272" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
-                  <Component id="btnAgregarIdioma" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
-                  <Component id="btnQuitarIdioma" min="-2" pref="120" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="185" pref="185" max="-2" attributes="0"/>
-                  <Component id="btnSiguienteIdiomas" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel3" min="-2" pref="466" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+                          <Component id="cboIdioma" min="-2" pref="210" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
+                          <Component id="cboNivel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                          <Component id="btnArchivoIdioma" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="272" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                          <Component id="btnAgregarIdioma" min="-2" pref="120" max="-2" attributes="0"/>
+                          <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
+                          <Component id="btnQuitarIdioma" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="185" pref="185" max="-2" attributes="0"/>
+                          <Component id="btnSiguienteIdiomas" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -504,7 +507,6 @@
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnArchivoIdioma" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnVerIdioma" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="163" max="-2" attributes="0"/>
@@ -557,17 +559,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Seleccionar archivo"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnVerIdioma">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c4" green="75" red="0" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ver"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnArchivoIdiomaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cboIdioma">
           <Properties>
@@ -680,7 +674,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLabel26" alignment="0" max="32767" attributes="0"/>
+              <Component id="jLabel26" alignment="0" pref="500" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -701,13 +695,9 @@
                                   <Component id="cboProfesion" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
                                   <Component id="txtFechaObtencion" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="cboGradoA" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnArchivoProfesion" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnVerProfesion" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="cboGradoA" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnArchivoProfesion" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -753,7 +743,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnArchivoProfesion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnVerProfesion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnSiguienteProfesion" min="-2" max="-2" attributes="0"/>
@@ -865,17 +854,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Seleccionar archivo"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnVerProfesion">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c4" green="75" red="0" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ver"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnArchivoProfesionActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel20">
           <Properties>
