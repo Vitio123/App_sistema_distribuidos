@@ -8,6 +8,7 @@ import CapaNegocio.Entidades.EntidadGradoAcademico;
 import CapaNegocio.Entidades.EntidadPais;
 import CapaNegocio.Entidades.EntidadTipoDocumento;
 import CapaNegocio.Entidades.EntidadUniversidad;
+import CapaNegocio.ExperienciaLaboral;
 import CapaNegocio.GradoAcademico;
 import CapaNegocio.Idioma;
 import CapaNegocio.Pais;
@@ -45,6 +46,11 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         modeloIdioma.addColumn("Idioma");
         modeloIdioma.addColumn("Nivel");
         modeloIdioma.addColumn("Archivo");
+        modeloExpe.addColumn("Fecha Inicio");
+        modeloExpe.addColumn("Fecha salida");
+        modeloExpe.addColumn("Archivo");
+        modeloExpe.addColumn("Empresa");
+        modeloExpe.addColumn("Cargo");
     }
 
     public static String dni = "";
@@ -57,8 +63,10 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     public String imagenselect = "";
     public String archivoIdiomaselect = "";
     public String archivoProfesionselect = "";
+    public String archivoExperienciaselect = null;
 
     DefaultTableModel modeloIdioma = new DefaultTableModel();
+    DefaultTableModel modeloExpe = new DefaultTableModel();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -128,14 +136,13 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         txtFechaS = new javax.swing.JFormattedTextField();
         btnArchivoEL = new javax.swing.JButton();
-        btnVerEL = new javax.swing.JButton();
         txtFechaI = new javax.swing.JFormattedTextField();
         cboEmpresa = new javax.swing.JComboBox<>();
         btnFinalizar = new javax.swing.JButton();
-        btnCargo = new javax.swing.JComboBox<>();
+        cboCargo = new javax.swing.JComboBox<>();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblListadoExpe = new javax.swing.JTable();
         btnAgregarEL = new javax.swing.JButton();
         btnQuitarEL = new javax.swing.JButton();
 
@@ -641,10 +648,11 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         btnArchivoEL.setBackground(new java.awt.Color(0, 117, 196));
         btnArchivoEL.setForeground(new java.awt.Color(255, 255, 255));
         btnArchivoEL.setText("Seleccionar archivo");
-
-        btnVerEL.setBackground(new java.awt.Color(0, 117, 196));
-        btnVerEL.setForeground(new java.awt.Color(255, 255, 255));
-        btnVerEL.setText("Ver");
+        btnArchivoEL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArchivoELActionPerformed(evt);
+            }
+        });
 
         try {
             txtFechaI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**/**/****")));
@@ -662,14 +670,14 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
             }
         });
 
-        btnCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Supervisor" }));
+        cboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Supervisor" }));
 
         jLabel27.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(0, 117, 196));
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("Experiencia laboral");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblListadoExpe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -677,21 +685,31 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tblListadoExpe);
 
         btnAgregarEL.setBackground(new java.awt.Color(0, 117, 196));
         btnAgregarEL.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarEL.setText("Agregar");
+        btnAgregarEL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarELActionPerformed(evt);
+            }
+        });
 
         btnQuitarEL.setBackground(new java.awt.Color(0, 117, 196));
         btnQuitarEL.setForeground(new java.awt.Color(255, 255, 255));
         btnQuitarEL.setText("Quitar");
+        btnQuitarEL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarELActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelExperienciaLayout = new javax.swing.GroupLayout(panelExperiencia);
         panelExperiencia.setLayout(panelExperienciaLayout);
         panelExperienciaLayout.setHorizontalGroup(
             panelExperienciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
             .addGroup(panelExperienciaLayout.createSequentialGroup()
                 .addGroup(panelExperienciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelExperienciaLayout.createSequentialGroup()
@@ -713,13 +731,10 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                                     .addComponent(jLabel25))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelExperienciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(panelExperienciaLayout.createSequentialGroup()
-                                        .addComponent(btnArchivoEL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnVerEL))
+                                    .addComponent(btnArchivoEL)
                                     .addComponent(txtFechaS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cboEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(panelExperienciaLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
@@ -741,8 +756,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelExperienciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(btnArchivoEL)
-                    .addComponent(btnVerEL))
+                    .addComponent(btnArchivoEL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelExperienciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
@@ -750,7 +764,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelExperienciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(btnCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -776,7 +790,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSiguientePostulanteActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-
+        RegistroExperiencia();
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnSiguienteIdiomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteIdiomasActionPerformed
@@ -785,7 +799,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
     private void btnSiguienteProfesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteProfesionActionPerformed
         RegistroProfesion();
-        
+
     }//GEN-LAST:event_btnSiguienteProfesionActionPerformed
 
     private void cboDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboDepartamentoItemStateChanged
@@ -848,7 +862,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
             modeloIdioma.addRow(datos);
             tblListadoIdioma.setModel(modeloIdioma);
         }
-
     }//GEN-LAST:event_btnAgregarIdiomaActionPerformed
 
     private void btnQuitarIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarIdiomaActionPerformed
@@ -869,6 +882,39 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     private void btnArchivoProfesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoProfesionActionPerformed
         grabarArchivoProfesion();
     }//GEN-LAST:event_btnArchivoProfesionActionPerformed
+
+    private void btnArchivoELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoELActionPerformed
+        grabarArchivoExperiencia();
+    }//GEN-LAST:event_btnArchivoELActionPerformed
+
+    private void btnAgregarELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarELActionPerformed
+        Object datos[] = new Object[5];
+        datos[0] = txtFechaI.getText();
+        datos[1] = txtFechaS.getText();
+        datos[2] = archivoProfesionselect;
+
+        EntidadEmpresa empresa = (EntidadEmpresa) cboEmpresa.getSelectedItem();
+        datos[3] = empresa.getEmpresa_id();
+
+        datos[4] = cboCargo.getSelectedItem().toString();
+
+        if (datos[2] == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione el archivo");
+        } else {
+            modeloExpe.addRow(datos);
+            tblListadoExpe.setModel(modeloExpe);
+        }
+    }//GEN-LAST:event_btnAgregarELActionPerformed
+
+    private void btnQuitarELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarELActionPerformed
+        int pos = tblListadoExpe.getSelectedRow();
+
+        if (pos >= 0) {
+            modeloExpe.removeRow(pos);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una experiencia laboral");
+        }
+    }//GEN-LAST:event_btnQuitarELActionPerformed
 
     private void RegistroPostulante() {
         try {
@@ -972,6 +1018,22 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         try {
             if (txtFechaI.getText().isEmpty() || txtFechaS.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Rellene todos los campos");
+            } else {
+                if (tblListadoExpe.getRowCount() > 0) {
+                    for (int i = 0; i < tblListadoExpe.getRowCount(); i++) {
+                        ExperienciaLaboral objEL = new ExperienciaLaboral();
+                        objEL.setLink_archivo(tblListadoExpe.getValueAt(i, 2).toString());
+                        objEL.setPostulante_id(idpostulante);
+                        objEL.setEmpresa_id(Integer.parseInt(tblListadoExpe.getValueAt(i, 3).toString()));
+                        objEL.setCargo(tblListadoExpe.getValueAt(i, 4).toString());
+                        objEL.insertarExperiencia(tblListadoExpe.getValueAt(i, 0).toString(), tblListadoExpe.getValueAt(i, 1).toString());
+                        JOptionPane.showMessageDialog(this, "Se registró la experiencia laboral");
+                        dispose();
+                        new frmInicioSesion().setVisible(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Debe agregar al menos una experiencia laboral");
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -1052,6 +1114,18 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
             StringBuilder path = new StringBuilder();
             path.append(imagen.getAbsolutePath());
             archivoProfesionselect = path.toString();
+        }
+
+    }
+
+    private void grabarArchivoExperiencia() {
+        JFileChooser archivoseleccionado = new JFileChooser();
+        int seleccion = archivoseleccionado.showOpenDialog(null);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File imagen = archivoseleccionado.getSelectedFile();
+            StringBuilder path = new StringBuilder();
+            path.append(imagen.getAbsolutePath());
+            archivoExperienciaselect = path.toString();
         }
 
     }
@@ -1144,7 +1218,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     private javax.swing.JButton btnArchivoEL;
     private javax.swing.JButton btnArchivoIdioma;
     private javax.swing.JButton btnArchivoProfesion;
-    private javax.swing.JComboBox<String> btnCargo;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnQuitarEL;
     private javax.swing.JButton btnQuitarIdioma;
@@ -1152,8 +1225,8 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguienteIdiomas;
     private javax.swing.JButton btnSiguientePostulante;
     private javax.swing.JButton btnSiguienteProfesion;
-    private javax.swing.JButton btnVerEL;
     private javax.swing.JButton btnVerFoto;
+    private javax.swing.JComboBox<String> cboCargo;
     private javax.swing.JComboBox<String> cboDepartamento;
     private javax.swing.JComboBox<String> cboDistrito;
     private javax.swing.JComboBox<String> cboEmpresa;
@@ -1198,10 +1271,10 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panelExperiencia;
     private javax.swing.JPanel panelIdiomas;
     private javax.swing.JPanel panelPostulante;
+    private javax.swing.JTable tblListadoExpe;
     private javax.swing.JTable tblListadoIdioma;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;

@@ -40,9 +40,22 @@ public class ExperienciaLaboral extends EntidadExperienciaLaboral {
         }
     }
 
-    public void insertarExperiencia() throws Exception {
+    public void insertarExperiencia(String fechaI, String fechaS) throws Exception {
         try {
-            SQL = "insert into dbo.Experiencia_laboral(fecha_inicio, fecha_final, link_archivo, postulante_postulante_id, empresa_empresa_id, cargo) values('" + super.getFecha_inicio() + "', '" + super.getFecha_final() + "', '" + super.getLink_archivo() + "', '" + super.getPostulante_id() + ", " + super.getEmpresa_id() + ", '" + super.getCargo() + "')";
+            
+            String fechainicio = fechaI.replace("/", "-");
+            String diaI = fechainicio.substring(0, 2);
+            String mesI = fechainicio.substring(3, 5);
+            String anoI = fechainicio.substring(6, 10);
+            String fechaIni = anoI + "-" + mesI + "-" + diaI;
+            
+            String fechasalida = fechaS.replace("/", "-");
+            String diaS = fechasalida.substring(0, 2);
+            String mesS = fechasalida.substring(3, 5);
+            String anoS = fechasalida.substring(6, 10);
+            String fechaSal = anoS + "-" + mesS + "-" + diaS;
+            
+            SQL = "insert into dbo.Experiencia_laboral(fecha_inicio, fecha_final, link_archivo, postulante_postulante_id, empresa_empresa_id, cargo) values('" + fechaIni + "', '" + fechaSal + "', '" + super.getLink_archivo() + "', " + super.getPostulante_id() + ", " + super.getEmpresa_id() + ", '" + super.getCargo() + "')";
             objC.ejecutarBD(SQL);
             objC.desconectarBD();
         } catch (Exception e) {
