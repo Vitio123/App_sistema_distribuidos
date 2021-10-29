@@ -496,16 +496,18 @@ public class jdMenu extends javax.swing.JDialog implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNotificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotificacionesActionPerformed
-
+        jdManyari_boton_notificaciones m = new jdManyari_boton_notificaciones(null, true);
+        m.setVisible(true);
     }//GEN-LAST:event_btnNotificacionesActionPerformed
     
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-       Manyari_boton_inicio objinicio = new Manyari_boton_inicio();
-      objinicio.setVisible(true);
+        jdManyari_boton_inicio m = new jdManyari_boton_inicio(null, true);
+        m.setVisible(true);
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+       jdManyari_boton_buscar m = new jdManyari_boton_buscar(null, true);
+       m.setVisible(true);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPostulanteActionPerformed
