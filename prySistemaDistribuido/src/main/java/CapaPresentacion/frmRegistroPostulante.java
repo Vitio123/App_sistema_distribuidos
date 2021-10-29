@@ -241,7 +241,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                     .addComponent(btnQuitarEL))
                 .addGap(18, 18, 18)
                 .addComponent(btnFinalizar)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelExperiencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 400));

@@ -3,6 +3,7 @@ package CapaNegocio;
 import CapaDatos.conexion;
 import CapaNegocio.Entidades.EntidadUbigeo;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,8 +19,59 @@ public class Ubigeo extends EntidadUbigeo{
         objC = new conexion();
     }
     
-    public void datosUbigeo(){
-        
+    public int buscarUbigeo() throws Exception{
+        try {
+            SQL = "select * from dbo.Ubigeo where departamento = '" + super.getDepartamento() + "' and provincia = '" + super.getProvincia() + "' and distrito = '" + super.getDistrito() + "'";
+            rs = objC.consultarBD(SQL);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            return -1;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
+    public ArrayList<String> departamentosUbigeo() throws Exception{
+        try {
+            SQL = "select departamento from dbo.ubigeo";
+            rs = objC.consultarBD(SQL);
+            ArrayList<String> departamentos = new ArrayList<String>();
+            while(rs.next()){
+                departamentos.add(rs.getString(1));
+            }
+            return departamentos;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
+    public ArrayList<String> provinciaUbigeo() throws Exception{
+        try {
+            SQL = "select provincia from dbo.ubigeo";
+            rs = objC.consultarBD(SQL);
+            ArrayList<String> provincias = new ArrayList<String>();
+            while(rs.next()){
+                provincias.add(rs.getString(1));
+            }
+            return provincias;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
+    public ArrayList<String> distritoUbigeo() throws Exception{
+        try {
+            SQL = "select distrito from dbo.Ubigeo";
+            rs = objC.consultarBD(SQL);
+            ArrayList<String> distritos = new ArrayList<String>();
+            while(rs.next()){
+                distritos.add(rs.getString(1));
+            }
+            return distritos;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
     
 }
