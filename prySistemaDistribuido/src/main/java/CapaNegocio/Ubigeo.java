@@ -18,4 +18,8 @@ public class Ubigeo extends EntidadUbigeo{
         objC = new conexion();
     }
     
+    public void datosUbigeo(){
+        
+    }
+    
 }
