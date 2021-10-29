@@ -117,5 +117,26 @@ public class Idioma extends EntidadIdioma {
             throw new Exception(e.getMessage());
         }
     }
+    
+    public ResultSet busquedaFiltradaPostulantePorIdioma( String busqueda) throws Exception{
+        String filtro="%"+busqueda+"%";
+        SQL="select ip.idioma_id, ip.idioma, ip.nivel, (p.apellido_parterno + ' ' + p.apellido_materno + ' ' + p.nombres) as nombre from dbo.Idiomas_postulante as ip inner join dbo.Postulante as p on p.postulante_id = ip.postulante_postulante_id where UPPER(ip.idioma) like UPPER('"+filtro+"')";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    public ResultSet busquedaFiltradaPostulantePorNivel( String busqueda) throws Exception{
+        String filtro="%"+busqueda+"%";
+        SQL="select ip.idioma_id, ip.idioma, ip.nivel, (p.apellido_parterno + ' ' + p.apellido_materno + ' ' + p.nombres) as nombre from dbo.Idiomas_postulante as ip inner join dbo.Postulante as p on p.postulante_id = ip.postulante_postulante_id where UPPER(ip.nivel) like UPPER('"+filtro+"')";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }
 

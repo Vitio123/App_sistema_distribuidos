@@ -6,15 +6,25 @@
 package CapaPresentacion;
 
 import CapaNegocio.Idioma;
+import static CapaPresentacion.jdMenuPost.obtenerFecha;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author Roberto Montero
  */
-public class jdListarIdiomasParaEm extends javax.swing.JDialog {
+public class jdListarIdiomasParaEm extends javax.swing.JDialog implements Runnable{
 
     Idioma objIdiomas = new Idioma();
+    String hor, min, seg;
+    Thread hiloHora;
     /**
      * Creates new form jdListarIdiomasParaEm
      */
@@ -23,8 +33,33 @@ public class jdListarIdiomasParaEm extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("LISTADO DE IDIOMAS DE LOS POSTULANTES");
+        lblFecha1.setText(obtenerFecha());
+        hiloHora = new Thread((Runnable) this);
+        hiloHora.start();
     }
 
+    public static String obtenerFecha() {
+        Date fechaActual = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
+        return formatofecha.format(fechaActual);
+    }
+
+    public void obtenerHora() {
+        Calendar calendario = new GregorianCalendar();
+        Date horaActual = new Date();
+        calendario.setTime(horaActual);
+        hor = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY) : "0" + calendario.get(Calendar.HOUR_OF_DAY);
+        min = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE) : "0" + calendario.get(Calendar.MINUTE);
+        seg = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
+    }
+
+    public void run() {
+        Thread current = Thread.currentThread();
+        while (current == hiloHora) {
+            obtenerHora();
+            lblHora1.setText(hor + ":" + min + ":" + seg);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,6 +86,11 @@ public class jdListarIdiomasParaEm extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel7.setText("USUARIO:");
 
@@ -217,7 +257,12 @@ public class jdListarIdiomasParaEm extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         listarIdiomas();
+        txtBusqueda.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        listarIdiomas();
+    }//GEN-LAST:event_formWindowOpened
 
     public void listarIdiomas(){
             try {
@@ -226,6 +271,65 @@ public class jdListarIdiomasParaEm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
    }
+    
+     public void busquedaFiltradaPostulantePorIdioma(String busqueda){
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("ID");
+            modelo.addColumn("Idioma");
+            modelo.addColumn("Nivel");
+            modelo.addColumn("Postulante");
+   
+        tblIdiomas.setModel(modelo);
+        ResultSet data = null;
+         
+        TableColumn  columna = tblIdiomas.getColumn("ID");
+        
+        TableColumn  columna2 = tblIdiomas.getColumn("Idioma");
+        
+        TableColumn  columna3 = tblIdiomas.getColumn("Nivel");
+  
+        TableColumn  columna4 = tblIdiomas.getColumn("Postulante");
+
+
+        try {
+               data=objIdiomas.busquedaFiltradaPostulantePorIdioma(busqueda);
+               while(data.next()){      
+                   modelo.addRow(new Object[]{data.getInt(1),data.getString(2),data.getString(3), data.getString(4)});             
+               }
+        } catch (Exception e) {
+            System.err.println("error"+ e);
+        }
+        }
+        
+        public void busquedaFiltradaPostulantePorNivel(String busqueda){
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("ID");
+            modelo.addColumn("Idioma");
+            modelo.addColumn("Nivel");
+            modelo.addColumn("Postulante");
+   
+        tblIdiomas.setModel(modelo);
+        ResultSet data = null;
+         
+        TableColumn  columna = tblIdiomas.getColumn("ID");
+        
+        TableColumn  columna2 = tblIdiomas.getColumn("Idioma");
+        
+        TableColumn  columna3 = tblIdiomas.getColumn("Nivel");
+  
+        TableColumn  columna4 = tblIdiomas.getColumn("Postulante");
+
+        try {
+               data=objIdiomas.busquedaFiltradaPostulantePorNivel(busqueda);
+               while(data.next()){      
+                   modelo.addRow(new Object[]{data.getInt(1),data.getString(2),data.getString(3), data.getString(4)});               
+               }
+        } catch (Exception e) {
+            System.err.println("error"+ e);
+        }
+    }
     /**
      * @param args the command line arguments
      */

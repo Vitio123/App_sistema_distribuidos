@@ -6,7 +6,13 @@
 package CapaPresentacion;
 
 import CapaNegocio.Postulante;
+import static CapaPresentacion.jdMenuEm.obtenerFecha;
+import static CapaPresentacion.jdMenuPost.obtenerFecha;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -15,8 +21,10 @@ import javax.swing.table.TableColumn;
  *
  * @author Roberto Montero
  */
-public class jdListarPostulantesParaEm extends javax.swing.JDialog {
+public class jdListarPostulantesParaEm extends javax.swing.JDialog implements Runnable{
     Postulante objPostulante = new Postulante();
+    String hor, min, seg;
+    Thread hiloHora;
     /**
      * Creates new form jdListarPostulantesParaEm
      */
@@ -25,6 +33,31 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
         initComponents();
         setTitle("LISTADO DE POSTULANTES");
         setLocationRelativeTo(null);
+        lblFecha1.setText(obtenerFecha());
+        hiloHora = new Thread((Runnable) this);
+        hiloHora.start();
+    }
+    public static String obtenerFecha() {
+        Date fechaActual = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
+        return formatofecha.format(fechaActual);
+    }
+
+    public void obtenerHora() {
+        Calendar calendario = new GregorianCalendar();
+        Date horaActual = new Date();
+        calendario.setTime(horaActual);
+        hor = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY) : "0" + calendario.get(Calendar.HOUR_OF_DAY);
+        min = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE) : "0" + calendario.get(Calendar.MINUTE);
+        seg = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
+    }
+
+    public void run() {
+        Thread current = Thread.currentThread();
+        while (current == hiloHora) {
+            obtenerHora();
+            lblHora1.setText(hor + ":" + min + ":" + seg);
+        }
     }
 
     /**
@@ -228,6 +261,7 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         listarPostulantes();
+        txtBusqueda.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void listarPostulantes(){

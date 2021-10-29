@@ -64,6 +64,27 @@ public class Empresa extends EntidadEmpresa{
         }
     }
     
+    public ResultSet busquedaFiltradaEmpresaPorNombre( String busqueda) throws Exception{
+        String filtro="%"+busqueda+"%";
+        SQL="select e.empresa_id, e.nombre_empresa, e.tipo_empresa, e.ruc, pa.nombre_pais from dbo.Empresa as e inner join dbo.Pais as pa on pa.pais_id = e.pais_pais_id where UPPER(e.nombre_empresa) like UPPER('"+filtro+"')";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    public ResultSet busquedaFiltradaEmpresaPorTipo( String busqueda) throws Exception{
+        String filtro="%"+busqueda+"%";
+        SQL="select e.empresa_id, e.nombre_empresa, e.tipo_empresa, e.ruc, pa.nombre_pais from dbo.Empresa as e inner join dbo.Pais as pa on pa.pais_id = e.pais_pais_id where UPPER(e.tipo_empresa) like UPPER('"+filtro+"')";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
     public ArrayList<EntidadEmpresa> llenarEmpresas() throws Exception{
         try {
             ArrayList<EntidadEmpresa> empresas = new ArrayList<EntidadEmpresa>();

@@ -5,7 +5,7 @@
  */
 package CapaPresentacion;
 
-import CapaNegocio.Profesion;
+import CapaNegocio.Empresa;
 import static CapaPresentacion.jdMenuPost.obtenerFecha;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -20,24 +20,22 @@ import javax.swing.table.TableColumn;
  *
  * @author Roberto Montero
  */
-public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runnable{
+public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Runnable{
 
-    Profesion objProfesion = new Profesion();
+    Empresa objEmpresas = new Empresa();
     String hor, min, seg;
     Thread hiloHora;
     /**
-     * Creates new form jdListarProfesionParaEm
+     * Creates new form jdListarEmpresasParaPost
      */
-    public jdListarProfesionParaEm(java.awt.Frame parent, boolean modal) {
+    public jdListarEmpresasParaPost(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("LISTADO DE PROFESIONES DE LOS POSTULANTES");
         lblFecha1.setText(obtenerFecha());
         hiloHora = new Thread((Runnable) this);
         hiloHora.start();
     }
-    
     public static String obtenerFecha() {
         Date fechaActual = new Date();
         SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
@@ -72,11 +70,11 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
 
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProfesion = new javax.swing.JTable();
+        tblEmpresa = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         cboTipoB = new javax.swing.JComboBox<>();
         txtBusqueda = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -96,7 +94,7 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel8.setForeground(new java.awt.Color(102, 102, 255));
 
-        tblProfesion.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -107,20 +105,14 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblProfesion);
+        jScrollPane1.setViewportView(tblEmpresa);
 
         jLabel1.setFont(new java.awt.Font("Adobe Devanagari", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 117, 196));
-        jLabel1.setText("PROFESION POSTULANTE");
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(14, 40, 68));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search1_rm.png"))); // NOI18N
-        jLabel12.setText("Busqueda por:");
-        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("EMPRESAS");
 
         cboTipoB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTipoB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Profesión", "Grado Academico" }));
+        cboTipoB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Tipo" }));
 
         txtBusqueda.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -128,6 +120,12 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
                 txtBusquedaKeyReleased(evt);
             }
         });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(14, 40, 68));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search1_rm.png"))); // NOI18N
+        jLabel12.setText("Busqueda por:");
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loop.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +145,7 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 183, Short.MAX_VALUE)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
@@ -157,11 +155,12 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
                                 .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(185, 185, 185))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(120, 120, 120))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addContainerGap())))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(301, 301, 301))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,10 +169,10 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboTipoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboTipoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,7 +196,7 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,100 +247,95 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         String busqueda=cboTipoB.getSelectedItem().toString();
-        if(busqueda.equalsIgnoreCase("Profesión")){
-            busquedaFiltradaPostulantePorCategoria(txtBusqueda.getText());
+        if(busqueda.equalsIgnoreCase("Nombre")){
+            busquedaFiltradaEmpresaPorNombre(txtBusqueda.getText());
         }else{
-            busquedaFiltradaPostulantePorGrado(txtBusqueda.getText());
+            busquedaFiltradaEmpresasPorTipo(txtBusqueda.getText());
         }
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        listarProfesionesPostulantes();
-    }//GEN-LAST:event_formWindowOpened
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        listarProfesionesPostulantes();
+        listarEmpresa();
         txtBusqueda.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void listarProfesionesPostulantes(){
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+           listarEmpresa();
+    }//GEN-LAST:event_formWindowOpened
+
+    public void listarEmpresa(){
             try {
-            objProfesion.listarProfesion(tblProfesion);
+            objEmpresas.listarEmpresa(tblEmpresa);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
    }
     
-    public void busquedaFiltradaPostulantePorCategoria(String busqueda){
+    public void busquedaFiltradaEmpresaPorNombre(String busqueda){
         
         DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("ID");
-            modelo.addColumn("Fecha");
-            modelo.addColumn("Profesión");
-            modelo.addColumn("Postulante");
-            modelo.addColumn("Grado Academico");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Tipo");
+            modelo.addColumn("RUC");
+            modelo.addColumn("Pais");
    
-        tblProfesion.setModel(modelo);
+        tblEmpresa.setModel(modelo);
         ResultSet data = null;
          
-        TableColumn  columna = tblProfesion.getColumn("ID");
-        columna.setMinWidth(80);
-        columna.setMaxWidth(120);
-        TableColumn  columna2 = tblProfesion.getColumn("Fecha");
-        columna2.setMinWidth(120);
-        columna2.setMaxWidth(160);
-        TableColumn  columna3 = tblProfesion.getColumn("Profesión");
-        columna3.setMinWidth(146);
-        columna3.setMaxWidth(200);
-        TableColumn  columna4 = tblProfesion.getColumn("Postulante");
-        columna4.setMinWidth(200);
-        columna4.setMaxWidth(240);
-        TableColumn  columna5 = tblProfesion.getColumn("Grado Academico");
-        columna4.setMinWidth(240);
-        columna4.setMaxWidth(280);
+        TableColumn  columna = tblEmpresa.getColumn("ID");
+        
+        TableColumn  columna2 = tblEmpresa.getColumn("Nombre");
+        
+        TableColumn  columna3 = tblEmpresa.getColumn("Tipo");
+  
+        TableColumn  columna4 = tblEmpresa.getColumn("RUC");
+        
+        TableColumn  columna5 = tblEmpresa.getColumn("Pais");
+
 
         try {
-               data=objProfesion.busquedaFiltradaPostulantePorCategoria(busqueda);
+               data=objEmpresas.busquedaFiltradaEmpresaPorNombre(busqueda);
                while(data.next()){      
-                   modelo.addRow(new Object[]{data.getInt(1),data.getDate(2),data.getString(3), data.getString(4), data.getString(5) });             
+                   modelo.addRow(new Object[]{data.getInt(1),data.getString(2),data.getString(3), data.getString(4), data.getString(5)});             
                }
         } catch (Exception e) {
             System.err.println("error"+ e);
         }
         }
         
-        public void busquedaFiltradaPostulantePorGrado(String busqueda){
+        public void busquedaFiltradaEmpresasPorTipo(String busqueda){
         
         DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("ID");
-            modelo.addColumn("Fecha");
-            modelo.addColumn("Profesión");
-            modelo.addColumn("Postulante");
-            modelo.addColumn("Grado Academico");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Tipo");
+            modelo.addColumn("RUC");
+            modelo.addColumn("Pais");
    
-        tblProfesion.setModel(modelo);
+        tblEmpresa.setModel(modelo);
         ResultSet data = null;
          
-        TableColumn  columna = tblProfesion.getColumn("ID");
-
-        TableColumn  columna2 = tblProfesion.getColumn("Fecha");
-
-        TableColumn  columna3 = tblProfesion.getColumn("Profesión");
-
-        TableColumn  columna4 = tblProfesion.getColumn("Postulante");
-
-        TableColumn  columna5 = tblProfesion.getColumn("Grado Academico");
+        TableColumn  columna = tblEmpresa.getColumn("ID");
+        
+        TableColumn  columna2 = tblEmpresa.getColumn("Nombre");
+        
+        TableColumn  columna3 = tblEmpresa.getColumn("Tipo");
+  
+        TableColumn  columna4 = tblEmpresa.getColumn("RUC");
+        
+        TableColumn  columna5 = tblEmpresa.getColumn("Pais");
 
 
         try {
-               data=objProfesion.busquedaFiltradaPostulantePorGrado(busqueda);
+               data=objEmpresas.busquedaFiltradaEmpresaPorTipo(busqueda);
                while(data.next()){      
-                   modelo.addRow(new Object[]{data.getInt(1),data.getDate(2),data.getString(3), data.getString(4), data.getString(5) });             
+                   modelo.addRow(new Object[]{data.getInt(1),data.getString(2),data.getString(3), data.getString(4), data.getString(5)});             
                }
         } catch (Exception e) {
             System.err.println("error"+ e);
         }
-    }
+        }
     /**
      * @param args the command line arguments
      */
@@ -359,20 +353,20 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jdListarProfesionParaEm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jdListarEmpresasParaPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jdListarProfesionParaEm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jdListarEmpresasParaPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jdListarProfesionParaEm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jdListarEmpresasParaPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jdListarProfesionParaEm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jdListarEmpresasParaPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                jdListarProfesionParaEm dialog = new jdListarProfesionParaEm(new javax.swing.JFrame(), true);
+                jdListarEmpresasParaPost dialog = new jdListarEmpresasParaPost(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -398,7 +392,7 @@ public class jdListarProfesionParaEm extends javax.swing.JDialog implements Runn
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFecha1;
     private javax.swing.JLabel lblHora1;
-    private javax.swing.JTable tblProfesion;
+    private javax.swing.JTable tblEmpresa;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }
