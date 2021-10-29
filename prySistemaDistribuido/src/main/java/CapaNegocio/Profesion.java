@@ -74,7 +74,7 @@ public class Profesion extends EntidadProfesion {
 
     public void listarProfesion(JTable tblListado) throws Exception {
         try {
-            SQL = "select pp.detalle_id, pp.fecha_obtencion, cp.descripcion, (p.apellido_parterno + ' ' + p.apellido_materno + ' ' + p.nombres) as nombre from dbo.Postulante_profesion as pp inner join dbo.Categoria_profesion as cp on cp.categoria_id = pp.categoria_profesion_categoria inner join dbo.Postulante as p on p.postulante_id = pp.postulante_postulante_id order by 1 asc";
+            SQL = "select pp.detalle_id, pp.fecha_obtencion, cp.descripcion, (p.apellido_parterno + ' ' + p.apellido_materno + ' ' + p.nombres) as nombre, ga.descripcion_grado from dbo.Postulante_profesion as pp inner join dbo.Categoria_profesion as cp on cp.categoria_id = pp.categoria_profesion_categoria inner join dbo.Postulante as p on p.postulante_id = pp.postulante_postulante_id inner join dbo.Grado_academico as ga on ga.grado_id = pp.grado_academico_grado_id order by 1 asc";
             rs = objC.consultarBD(SQL);
             
             DefaultTableModel modelo = new DefaultTableModel();
@@ -82,6 +82,7 @@ public class Profesion extends EntidadProfesion {
             modelo.addColumn("Fecha");
             modelo.addColumn("Profesión");
             modelo.addColumn("Postulante");
+            modelo.addColumn("Grado Academico");
             
             tblListado.setModel(modelo);
             
@@ -100,5 +101,25 @@ public class Profesion extends EntidadProfesion {
         }
     }
 
+    public ResultSet busquedaFiltradaPostulantePorCategoria( String busqueda) throws Exception{
+        String filtro="%"+busqueda+"%";
+        SQL="select pp.detalle_id, pp.fecha_obtencion, cp.descripcion, (p.apellido_parterno + ' ' + p.apellido_materno + ' ' + p.nombres) as nombre, ga.descripcion_grado from dbo.Postulante_profesion as pp inner join dbo.Categoria_profesion as cp on cp.categoria_id = pp.categoria_profesion_categoria inner join dbo.Postulante as p on p.postulante_id = pp.postulante_postulante_id inner join dbo.Grado_academico as ga on ga.grado_id = pp.grado_academico_grado_id where UPPER(cp.descripcion) like UPPER('"+filtro+"')";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    public ResultSet busquedaFiltradaPostulantePorGrado( String busqueda) throws Exception{
+        String filtro="%"+busqueda+"%";
+        SQL="select pp.detalle_id, pp.fecha_obtencion, cp.descripcion, (p.apellido_parterno + ' ' + p.apellido_materno + ' ' + p.nombres) as nombre, ga.descripcion_grado from dbo.Postulante_profesion as pp inner join dbo.Categoria_profesion as cp on cp.categoria_id = pp.categoria_profesion_categoria inner join dbo.Postulante as p on p.postulante_id = pp.postulante_postulante_id inner join dbo.Grado_academico as ga on ga.grado_id = pp.grado_academico_grado_id where UPPER(ga.descripcion_grado) like UPPER('"+filtro+"')";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }
 
