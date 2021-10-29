@@ -1,6 +1,21 @@
 package CapaPresentacion;
 
+import CapaNegocio.CategoriaProfesion;
+import CapaNegocio.Empresa;
+import CapaNegocio.Entidades.EntidadCategoriaProfesion;
+import CapaNegocio.Entidades.EntidadEmpresa;
+import CapaNegocio.Entidades.EntidadGradoAcademico;
+import CapaNegocio.Entidades.EntidadPais;
+import CapaNegocio.Entidades.EntidadTipoDocumento;
+import CapaNegocio.Entidades.EntidadUniversidad;
+import CapaNegocio.GradoAcademico;
+import CapaNegocio.Pais;
 import CapaNegocio.Postulante;
+import CapaNegocio.TipoDocumento;
+import CapaNegocio.Ubigeo;
+import CapaNegocio.Universidad;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,12 +29,14 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         initComponents();
         habilitarPanelPostulante();
         this.setLocationRelativeTo(null);
+        llenarCombos();
     }
     
     public static String dni = "";
     public static String contraseña = "";
     
     Postulante objP = null;
+    Ubigeo objU = null;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -145,6 +162,8 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                 btnFinalizarActionPerformed(evt);
             }
         });
+
+        btnCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Supervisor" }));
 
         jLabel27.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(0, 117, 196));
@@ -358,7 +377,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                     .addComponent(btnVerProfesion))
                 .addGap(35, 35, 35)
                 .addComponent(btnSiguienteProfesion)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         getContentPane().add(PanelProfesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 468, 400));
@@ -501,6 +520,18 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         txtApellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoMaternoActionPerformed(evt);
+            }
+        });
+
+        cboDepartamento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboDepartamentoItemStateChanged(evt);
+            }
+        });
+
+        cboProvincia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboProvinciaItemStateChanged(evt);
             }
         });
 
@@ -655,6 +686,29 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     private void btnSiguienteProfesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteProfesionActionPerformed
         habilitarPanelExperiencia();
     }//GEN-LAST:event_btnSiguienteProfesionActionPerformed
+
+    private void cboDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboDepartamentoItemStateChanged
+        try {
+            objU = new Ubigeo();
+            objU.setDepartamento(cboDepartamento.getSelectedItem().toString());
+            ArrayList<String> provincias = objU.provinciaUbigeo();
+            cboProvincia.setModel(new DefaultComboBoxModel(provincias.toArray()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_cboDepartamentoItemStateChanged
+
+    private void cboProvinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboProvinciaItemStateChanged
+        try {
+            objU = new Ubigeo();
+            objU.setDepartamento(cboDepartamento.getSelectedItem().toString());
+            objU.setProvincia(cboProvincia.getSelectedItem().toString());
+            ArrayList<String> distritos = objU.distritoUbigeo();
+            cboDistrito.setModel(new DefaultComboBoxModel(distritos.toArray()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_cboProvinciaItemStateChanged
     
     private void RegistroPostulante(){
         try {
@@ -698,11 +752,49 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         }
     }
     
+    private void llenarCombos(){
+        try {
+            
+            objU = new Ubigeo();
+            ArrayList<String> departamentos = objU.departamentosUbigeo();
+            cboDepartamento.setModel(new DefaultComboBoxModel(departamentos.toArray()));
+            
+            Pais objPais = new Pais();
+            ArrayList<EntidadPais> paises = objPais.llenarPais();
+            cboPais.setModel(new DefaultComboBoxModel(paises.toArray()));
+            
+            CategoriaProfesion objCP = new CategoriaProfesion();
+            ArrayList<EntidadCategoriaProfesion> categorias = objCP.llenarCategorias();
+            cboProfesion.setModel(new DefaultComboBoxModel(categorias.toArray()));
+            cboProfesionPostulante.setModel(new DefaultComboBoxModel(categorias.toArray()));
+            
+            TipoDocumento objTD = new TipoDocumento();
+            ArrayList<EntidadTipoDocumento> documentos = objTD.llenarDocumentos();
+            cboTipoDocumento.setModel(new DefaultComboBoxModel(documentos.toArray()));
+            
+            Universidad objUni = new Universidad();
+            ArrayList<EntidadUniversidad> universidades = objUni.llenarUniversidad();
+            cboUniversidad.setModel(new DefaultComboBoxModel(universidades.toArray()));
+            
+            GradoAcademico objGA = new GradoAcademico();
+            ArrayList<EntidadGradoAcademico> grados = objGA.llenarGrados();
+            cboGradoA.setModel(new DefaultComboBoxModel(grados.toArray()));
+            
+            Empresa objEm = new Empresa();
+            ArrayList<EntidadEmpresa> empresas = objEm.llenarEmpresas();
+            cboEmpresa.setModel(new DefaultComboBoxModel(empresas.toArray()));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
     private void Limpiar(){
         txtID.setEditable(false);
         txtApellidoPaterno.setText("");
         txtApellidoMaterno.setText("");
-        
+        txtNombres.setText("");
+        txtColegiatura.setText("");
     }
     
     private void habilitarPanelPostulante(){
