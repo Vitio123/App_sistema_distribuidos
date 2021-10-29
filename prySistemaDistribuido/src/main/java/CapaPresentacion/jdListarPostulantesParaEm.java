@@ -23,7 +23,7 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
     public jdListarPostulantesParaEm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("BUSCAR POSTULANTES");
+        setTitle("LISTADO DE POSTULANTES");
         setLocationRelativeTo(null);
     }
 
