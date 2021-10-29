@@ -26,7 +26,7 @@ public class Empresa extends EntidadEmpresa{
             SQL = "select * from empresa where ruc = '"+ruc+"' and contraseña='"+contraseña+"'";
             rs = objC.consultarBD(SQL);
             if (rs.next()) {
-                rpt=1;
+                rpt=rs.getInt(1);
             }
            objC.desconectarBD();
         } catch (Exception e) {

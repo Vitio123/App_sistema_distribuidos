@@ -5,6 +5,8 @@
  */
 package CapaPresentacion;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author nickb
@@ -16,6 +18,7 @@ public class Manyari_boton_buscar extends javax.swing.JFrame {
      */
     public Manyari_boton_buscar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -63,6 +66,11 @@ public class Manyari_boton_buscar extends javax.swing.JFrame {
         jLabel18.setText("NOTIFICACIONES");
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/notifications_rm.png"))); // NOI18N
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -88,6 +96,11 @@ public class Manyari_boton_buscar extends javax.swing.JFrame {
         );
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home_rm.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel19.setText("INICIO");
 
@@ -114,6 +127,7 @@ public class Manyari_boton_buscar extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton4.setBackground(new java.awt.Color(0, 117, 196));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search_rm.png"))); // NOI18N
 
         jLabel15.setText("BUSCAR");
@@ -164,7 +178,7 @@ public class Manyari_boton_buscar extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(17, 17, 38)));
 
-        jLabel4.setText("USUARIO:");
+        jLabel4.setText("POSTULANTE:");
 
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -182,10 +196,10 @@ public class Manyari_boton_buscar extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,6 +361,22 @@ public class Manyari_boton_buscar extends javax.swing.JFrame {
     private void btnModificarPostulante2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPostulante2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarPostulante2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         Manyari_boton_inicio obj= new Manyari_boton_inicio();
+        
+
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+         Manyari_boton_notificaciones obj= new Manyari_boton_notificaciones();
+        
+
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

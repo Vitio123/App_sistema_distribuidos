@@ -20,7 +20,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
     public frmInicioSesion() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Validaciones.limitarTeclado(txtDocumento);
+        //Validaciones.limitarTeclado(txtDocumento);
     }
     
     Postulante objPostulante=new Postulante();
@@ -84,7 +84,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
         txtDocumento.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
 
         cbotipo.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
-        cbotipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Postulante", "Empresa" }));
+        cbotipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Postulante", "Empresa", "Administrador" }));
         cbotipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbotipoItemStateChanged(evt);
@@ -129,27 +129,28 @@ public class frmInicioSesion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cbotipo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(lblTipoDoc))
-                                    .addGap(13, 13, 13))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDocumento)
-                                    .addComponent(lblTipoDoc1)
-                                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)))
-                        .addGap(21, 21, 21))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabel2)
+                                    .addComponent(lblTipoDoc))
+                                .addGap(159, 159, 159))
+                            .addComponent(lblTipoDoc1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtContraseña, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbotipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDocumento, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGap(10, 10, 10))))
                 .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(92, 92, 92))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +205,12 @@ public class frmInicioSesion extends javax.swing.JFrame {
         if(pos==0){
             lblTipoDoc.setText("DNI:");
         }else{
-            lblTipoDoc.setText("RUC:");
+            if(pos==1){
+                lblTipoDoc.setText("RUC:");
+            }else{
+                lblTipoDoc.setText("Usuario:");
+            }
+            
         }
     }//GEN-LAST:event_cbotipoItemStateChanged
 
@@ -218,21 +224,40 @@ public class frmInicioSesion extends javax.swing.JFrame {
             if(documento.isEmpty()){
                 JOptionPane.showMessageDialog(null,"Ingrese su número de documento por favor","error",  JOptionPane.ERROR_MESSAGE);
             }else{
+                if(cbotipo.getSelectedIndex()!=2){
                 try {
                     if(cbotipo.getSelectedIndex()==0){
                         rpt=objPostulante.verificarLogin(documento, contraseña);
                     }else{
                         rpt=objEmpresa.verificarLogin(documento, contraseña);
                     }
-                    if(rpt==1){
-                        jdMenu obj = new jdMenu(this, true);
-                        obj.setVisible(true);
+                    if(rpt>0){
+                        if(cbotipo.getSelectedIndex()==0){
+                            Manyari_boton_inicio.idPostulante=rpt;
+                            Manyari_boton_inicio obj = new Manyari_boton_inicio();
+                            obj.setVisible(true);
+                        }else{
+                            frmEmpresaInicio.idPostulante=rpt;
+                            frmEmpresaInicio obj = new frmEmpresaInicio();
+                            obj.setVisible(true);
+                        }
+                        
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(null,"Datos incorectos, intente nuevamente","error",  JOptionPane.ERROR_MESSAGE);
                     };
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,"Error en la BD "+ex,"error",  JOptionPane.ERROR_MESSAGE);
+                }
+                }else{
+                    //Administrador Sistema
+                    if(documento.equalsIgnoreCase("admin") && contraseña.equalsIgnoreCase("admin123456789")){
+                        jdMenu obj = new jdMenu(this, true);
+                        obj.setVisible(true);
+                        dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Datos incorectos, intente nuevamente","error",  JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }
