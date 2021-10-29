@@ -120,6 +120,28 @@ public class Postulante extends EntidadPostulante {
         }
         return rpt;
     }
+    
+    public ResultSet busquedaFiltradaPostulantePorNombre( String busqueda) throws Exception{
+        String filtro="%"+busqueda+"%";
+        SQL="select p.postulante_id, p.apellido_parterno + ' ' + p.apellido_materno as apellidos, p.nombres, p.numero_colegiatura, u.departamento, pa.nombre_pais from dbo.Postulante as p inner join dbo.Ubigeo as u on u.ubigeo_id = p.ubigeo_ubigeo_id inner join dbo.Pais as pa on pa.pais_id = p.pais_pais_id where UPPER(p.nombres) like UPPER('"+filtro+"')";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
+    public ResultSet busquedaFiltradaPostulantePorPais( String busqueda) throws Exception{
+        String filtro="%"+busqueda+"%";
+        SQL="select p.postulante_id, p.apellido_parterno + ' ' + p.apellido_materno as apellidos, p.nombres, p.numero_colegiatura, u.departamento, pa.nombre_pais from dbo.Postulante as p inner join dbo.Ubigeo as u on u.ubigeo_id = p.ubigeo_ubigeo_id inner join dbo.Pais as pa on pa.pais_id = p.pais_pais_id where UPPER(pa.nombre_pais) like UPPER('"+filtro+"')";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 
 }
 

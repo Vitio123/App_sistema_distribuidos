@@ -323,7 +323,9 @@ public class jdMenuPost extends javax.swing.JDialog implements Runnable{
     }//GEN-LAST:event_btnListarDatosActionPerformed
 
     private void btnListarDatos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarDatos1ActionPerformed
-        // TODO add your handling code here:
+        jdListarProfesionParaEm objListado = new jdListarProfesionParaEm(null, true);
+        objListado.setLocationRelativeTo(null);
+        objListado.setVisible(true);
     }//GEN-LAST:event_btnListarDatos1ActionPerformed
 
     private void btnListarDatos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarDatos2ActionPerformed

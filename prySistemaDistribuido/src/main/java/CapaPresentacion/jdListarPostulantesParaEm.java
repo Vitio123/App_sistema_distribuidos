@@ -40,9 +40,10 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPostulante = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         cboTipoB = new javax.swing.JComboBox<>();
         txtBusqueda = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -78,17 +79,26 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(0, 117, 196));
         jLabel1.setText("POSTULANTES");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(14, 40, 68));
-        jLabel12.setText("Busqueda por:");
-
         cboTipoB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTipoB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Colegiatura" }));
+        cboTipoB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Pais" }));
 
         txtBusqueda.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBusquedaKeyReleased(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(14, 40, 68));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search1_rm.png"))); // NOI18N
+        jLabel12.setText("Busqueda por:");
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loop.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -115,6 +125,10 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(185, 185, 185))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,10 +137,12 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboTipoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                    .addComponent(cboTipoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -202,13 +218,17 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
         if(busqueda.equalsIgnoreCase("Nombre")){
             busquedaFiltradaPostulantePorNombre(txtBusqueda.getText());
         }else{
-            busquedaFiltradaPostulantePorColegiatura(txtBusqueda.getText());
+            busquedaFiltradaPostulantePorPais(txtBusqueda.getText());
         }
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         listarPostulantes();
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        listarPostulantes();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void listarPostulantes(){
             try {
@@ -232,32 +252,29 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
         ResultSet data = null;
          
         TableColumn  columna = tblPostulante.getColumn("ID");
-        columna.setMinWidth(20);
-        columna.setMaxWidth(40);
+
         TableColumn  columna2 = tblPostulante.getColumn("Apellidos");
-        columna2.setMinWidth(80);
-        columna2.setMaxWidth(100);
+
         TableColumn  columna3 = tblPostulante.getColumn("Nombres");
-        columna3.setMinWidth(80);
-        columna3.setMaxWidth(100);
+
         TableColumn  columna4 = tblPostulante.getColumn("Colegiatura");
-        columna4.setMinWidth(80);
-        columna4.setMaxWidth(100);
+
         TableColumn  columna5 = tblPostulante.getColumn("Departamento");
-        columna4.setMinWidth(80);
-        columna4.setMaxWidth(100);
+
         TableColumn  columna6 = tblPostulante.getColumn("País");
-        columna4.setMinWidth(80);
-        columna4.setMaxWidth(100);
+
      
         try {
                data=objPostulante.busquedaFiltradaPostulantePorNombre(busqueda);
+               while(data.next()){      
+                   modelo.addRow(new Object[]{data.getInt(1),data.getString(2),data.getString(3), data.getString(4), data.getString(5), data.getString(6) });             
+               }
         } catch (Exception e) {
             System.err.println("error"+ e);
         }
     }
     
-  public void busquedaFiltradaPostulantePorColegiatura(String busqueda){
+  public void busquedaFiltradaPostulantePorPais(String busqueda){
         
         DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("ID");
@@ -272,26 +289,23 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
         
         
         TableColumn  columna = tblPostulante.getColumn("ID");
-        columna.setMinWidth(20);
-        columna.setMaxWidth(40);
+
         TableColumn  columna2 = tblPostulante.getColumn("Apellidos");
-        columna2.setMinWidth(80);
-        columna2.setMaxWidth(100);
+
         TableColumn  columna3 = tblPostulante.getColumn("Nombres");
-        columna3.setMinWidth(80);
-        columna3.setMaxWidth(100);
+
         TableColumn  columna4 = tblPostulante.getColumn("Colegiatura");
-        columna4.setMinWidth(80);
-        columna4.setMaxWidth(100);
+
         TableColumn  columna5 = tblPostulante.getColumn("Departamento");
-        columna4.setMinWidth(80);
-        columna4.setMaxWidth(100);
+
         TableColumn  columna6 = tblPostulante.getColumn("País");
-        columna4.setMinWidth(80);
-        columna4.setMaxWidth(100);
+
      
         try {
-               data=objPostulante.busquedaFiltradaPostulantePorColegiatura(busqueda);
+               data=objPostulante.busquedaFiltradaPostulantePorPais(busqueda);
+               while(data.next()){      
+                   modelo.addRow(new Object[]{data.getInt(1),data.getString(2),data.getString(3), data.getString(4), data.getString(5), data.getString(6) });          
+               }
         } catch (Exception e) {
             System.err.println("error"+ e);
         }
@@ -340,6 +354,7 @@ public class jdListarPostulantesParaEm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboTipoB;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
