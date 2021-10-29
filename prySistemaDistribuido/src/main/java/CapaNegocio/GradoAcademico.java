@@ -29,7 +29,7 @@ public class GradoAcademico extends EntidadGradoAcademico{
                 objEGA.setGrado_id(rs.getInt(1));
                 objEGA.setDescripcion_grado(rs.getString(2));
                 grados.add(objEGA);
-            }
+            }objC.desconectarBD();
             return grados;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

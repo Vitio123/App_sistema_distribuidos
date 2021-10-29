@@ -70,6 +70,7 @@ public class Empresa extends EntidadEmpresa{
         try {
             rs=objC.consultarBD(SQL);
             return rs;
+            
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
