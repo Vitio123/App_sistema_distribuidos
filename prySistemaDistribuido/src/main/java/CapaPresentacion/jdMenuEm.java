@@ -316,9 +316,9 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnListarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarDatosActionPerformed
-        Manyari_boton_inicio obj= new Manyari_boton_inicio();
-        obj.setVisible(true);
-        dispose();
+        jdListarEmpresasParaPost obj = new jdListarEmpresasParaPost(null,true);
+        obj.setVisible(true);    
+        
     }//GEN-LAST:event_btnListarDatosActionPerformed
 
     /**

@@ -32,6 +32,7 @@ public class jdListarEmpresasParaPost extends javax.swing.JDialog implements Run
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("LISTADO DE LAS EMPRESAS");
         lblFecha1.setText(obtenerFecha());
         hiloHora = new Thread((Runnable) this);
         hiloHora.start();
