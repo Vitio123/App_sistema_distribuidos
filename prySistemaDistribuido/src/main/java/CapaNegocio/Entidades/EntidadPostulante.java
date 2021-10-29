@@ -7,13 +7,13 @@ package CapaNegocio.Entidades;
 public class EntidadPostulante {
 
     private int postulante_id, tipo_documento_id, ubigeo_id, pais_id, profesion_categoria, numero_colegiatura;
-    private String numero_documento, apellido_paterno, apellido_materno, nombres, link_foto;
+    private String numero_documento, apellido_paterno, apellido_materno, nombres, link_foto, contra;
 
     public EntidadPostulante() {
 
     }
 
-    public EntidadPostulante(int postulante_id, int tipo_documento_id, int ubigeo_id, int pais_id, int profesion_categoria, int numero_colegiatura, String numero_documento, String apellido_paterno, String apellido_materno, String nombres, String link_foto) {
+    public EntidadPostulante(int postulante_id, int tipo_documento_id, int ubigeo_id, int pais_id, int profesion_categoria, int numero_colegiatura, String numero_documento, String apellido_paterno, String apellido_materno, String nombres, String link_foto, String contra) {
         this.postulante_id = postulante_id;
         this.tipo_documento_id = tipo_documento_id;
         this.ubigeo_id = ubigeo_id;
@@ -25,6 +25,7 @@ public class EntidadPostulante {
         this.apellido_materno = apellido_materno;
         this.nombres = nombres;
         this.link_foto = link_foto;
+        this.contra = contra;
     }
 
     public int getPostulante_id() {
@@ -114,6 +115,14 @@ public class EntidadPostulante {
     public void setLink_foto(String link_foto) {
         this.link_foto = link_foto;
     }
+
+    public String getContra() {
+        return contra;
+    }
+
+    public void setContra(String contra) {
+        this.contra = contra;
+    }  
 
     @Override
     public String toString() {

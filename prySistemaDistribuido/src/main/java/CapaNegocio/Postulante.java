@@ -48,7 +48,7 @@ public class Postulante extends EntidadPostulante {
 
     public void insertarPostulante() throws Exception {
         try {
-            SQL = "insert into dbo.Postulante(tipo_documento_id, numero_documento, apellido_paterno, apellido_materno, nombres, ubigeo_ubigeo_id, pais_pais_id, numero_colegiatura, link_foto) values(" + super.getTipo_documento_id() + ", '" + super.getNumero_documento() + "', '" + super.getApellido_paterno() + "', '" + super.getApellido_materno() + ", '" + super.getNombres() + "', " + super.getUbigeo_id() + ", " + super.getPais_id() + ", " + super.getNumero_colegiatura() + ", '" + super.getLink_foto() + "')";
+            SQL = "insert into dbo.Postulante(tipo_documento_id, numero_documento, apellido_parterno, apellido_materno, nombres, ubigeo_ubigeo_id, pais_pais_id, categoria_profesion_categoria, numero_colegiatura, link_foto, contraseña) values(" + super.getTipo_documento_id() + ", '" + super.getNumero_documento() + "', '" + super.getApellido_paterno() + "', '" + super.getApellido_materno() + "', '" + super.getNombres() + "', " + super.getUbigeo_id() + ", " + super.getPais_id() + ", " + super.getProfesion_categoria() + ", " + super.getNumero_colegiatura() + ", '" + super.getLink_foto() + "', '" + super.getContra() + "')";
             objC.ejecutarBD(SQL);
             objC.desconectarBD();
         } catch (Exception e) {
