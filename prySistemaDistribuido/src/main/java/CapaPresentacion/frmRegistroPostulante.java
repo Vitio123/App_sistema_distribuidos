@@ -26,6 +26,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -39,16 +40,23 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         llenarCombos();
         txtID.setText(dni);
-        //txtID.setEditable(false);
+        txtID.setEditable(false);
+        modeloIdioma.addColumn("Idioma");
+        modeloIdioma.addColumn("Nivel");
+        modeloIdioma.addColumn("Archivo");
     }
 
     public static String dni = "";
     public static String contraseña = "";
+    public int idpostulante = 0;
 
     Postulante objP = null;
     Ubigeo objU = null;
 
-    String imagenselect = "";
+    public String imagenselect = "";
+    public String archivoIdiomaselect = "";
+
+    DefaultTableModel modeloIdioma = new DefaultTableModel();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -92,7 +100,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         cboNivel = new javax.swing.JComboBox<>();
         btnSiguienteIdiomas = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblListado = new javax.swing.JTable();
+        tblListadoIdioma = new javax.swing.JTable();
         btnAgregarIdioma = new javax.swing.JButton();
         btnQuitarIdioma = new javax.swing.JButton();
         PanelProfesion = new javax.swing.JPanel();
@@ -132,7 +140,6 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         btnQuitarEL = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         panelPostulante.setBackground(new java.awt.Color(255, 255, 255));
@@ -282,7 +289,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                     .addGroup(panelPostulanteLayout.createSequentialGroup()
                         .addGap(190, 190, 190)
                         .addComponent(btnSiguientePostulante, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPostulanteLayout.setVerticalGroup(
             panelPostulanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +405,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
             }
         });
 
-        tblListado.setModel(new javax.swing.table.DefaultTableModel(
+        tblListadoIdioma.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -406,15 +413,25 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(tblListado);
+        jScrollPane2.setViewportView(tblListadoIdioma);
 
         btnAgregarIdioma.setBackground(new java.awt.Color(0, 117, 196));
         btnAgregarIdioma.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarIdioma.setText("Agregar");
+        btnAgregarIdioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarIdiomaActionPerformed(evt);
+            }
+        });
 
         btnQuitarIdioma.setBackground(new java.awt.Color(0, 117, 196));
         btnQuitarIdioma.setForeground(new java.awt.Color(255, 255, 255));
         btnQuitarIdioma.setText("Quitar");
+        btnQuitarIdioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarIdiomaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelIdiomasLayout = new javax.swing.GroupLayout(panelIdiomas);
         panelIdiomas.setLayout(panelIdiomasLayout);
@@ -766,6 +783,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnSiguienteIdiomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteIdiomasActionPerformed
+        RegistroIdioma();
         habilitarPanelProfesion();
     }//GEN-LAST:event_btnSiguienteIdiomasActionPerformed
 
@@ -821,6 +839,27 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVerFotoActionPerformed
 
+    private void btnAgregarIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarIdiomaActionPerformed
+        Object datos[] = new Object[3];
+        datos[0] = cboIdioma.getSelectedItem().toString();
+        datos[1] = cboNivel.getSelectedItem().toString();
+        datos[2] = archivoIdiomaselect;
+        modeloIdioma.addRow(datos);
+        tblListadoIdioma.setModel(modeloIdioma);
+
+    }//GEN-LAST:event_btnAgregarIdiomaActionPerformed
+
+    private void btnQuitarIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarIdiomaActionPerformed
+
+        int pos = tblListadoIdioma.getSelectedRow();
+
+        if (pos >= 0) {
+            modeloIdioma.removeRow(pos);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un idioma");
+        }
+    }//GEN-LAST:event_btnQuitarIdiomaActionPerformed
+
     private void RegistroPostulante() {
         try {
             if (txtApellidoPaterno.getText().isEmpty() || txtApellidoMaterno.getText().isEmpty() || txtNombres.getText().isEmpty() || txtColegiatura.getText().isEmpty()) {
@@ -830,34 +869,34 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
                 EntidadTipoDocumento documento = (EntidadTipoDocumento) cboTipoDocumento.getSelectedItem();
                 objP.setTipo_documento_id(documento.getTipo_documento_id());
-                
+
                 objP.setApellido_paterno(txtApellidoPaterno.getText());
                 objP.setApellido_materno(txtApellidoMaterno.getText());
                 objP.setNombres(txtNombres.getText());
-                
+
                 objP.setNumero_documento(txtID.getText());
                 objP.setContra(contraseña);
-                
+
                 objU = new Ubigeo();
                 objU.setDepartamento(cboDepartamento.getSelectedItem().toString());
                 objU.setProvincia(cboProvincia.getSelectedItem().toString());
                 objU.setDistrito(cboDistrito.getSelectedItem().toString());
                 int idU = objU.buscarUbigeo();
                 objP.setUbigeo_id(idU);
-                
+
                 EntidadPais pais = (EntidadPais) cboPais.getSelectedItem();
                 objP.setPais_id(pais.getPais_id());
-                
+
                 EntidadCategoriaProfesion categoria = (EntidadCategoriaProfesion) cboProfesionPostulante.getSelectedItem();
                 objP.setProfesion_categoria(categoria.getCategoria_id());
-                
+
                 objP.setNumero_colegiatura(Integer.parseInt(txtColegiatura.getText()));
-                
+
                 if (!imagenselect.isEmpty()) {
                     objP.setLink_foto(imagenselect);
                 }
-                
-                objP.insertarPostulante();
+
+                idpostulante = objP.insertarPostulante();
                 JOptionPane.showMessageDialog(this, "Se registró el postulante");
 
             }
@@ -868,13 +907,17 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
 
     private void RegistroIdioma() {
         try {
-            if (tblListado.getRowCount() > 0) {
-                for (int i = 0; i < tblListado.getSelectedRowCount(); i++) {
-                Idioma objI = new Idioma();
-                //objI.setIdioma_id(tblListado);
-            }
-            }
-            else{
+            if (tblListadoIdioma.getRowCount() > 0) {
+                for (int i = 0; i < tblListadoIdioma.getRowCount(); i++) {
+                    Idioma objI = new Idioma();
+                    objI.setIdioma(tblListadoIdioma.getValueAt(i, 0).toString());
+                    objI.setNivel(tblListadoIdioma.getValueAt(i, 1).toString());
+                    objI.setLink_archivo(tblListadoIdioma.getValueAt(i, 2).toString());
+                    objI.setPostulante_id(idpostulante);
+                    objI.insertarIdioma();
+                    JOptionPane.showMessageDialog(this, "Se registró el idioma");
+                }
+            } else {
                 JOptionPane.showMessageDialog(this, "Debe agregar al menos un idioma");
             }
         } catch (Exception e) {
@@ -952,6 +995,18 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "La imagen debe ser PNG, JPG o GIF");
                 imagenselect = "";
             }
+        }
+
+    }
+
+    private void grabarArchivo() {
+        JFileChooser archivoseleccionado = new JFileChooser();
+        int seleccion = archivoseleccionado.showOpenDialog(null);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File imagen = archivoseleccionado.getSelectedFile();
+            StringBuilder path = new StringBuilder();
+            path.append(imagen.getAbsolutePath());
+            archivoIdiomaselect = path.toString();
         }
 
     }
@@ -1104,7 +1159,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
     private javax.swing.JPanel panelExperiencia;
     private javax.swing.JPanel panelIdiomas;
     private javax.swing.JPanel panelPostulante;
-    private javax.swing.JTable tblListado;
+    private javax.swing.JTable tblListadoIdioma;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtColegiatura;
