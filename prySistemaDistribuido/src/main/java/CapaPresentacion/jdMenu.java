@@ -517,7 +517,7 @@ public class jdMenu extends javax.swing.JDialog implements Runnable{
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnListarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarDatosActionPerformed
-        jdListado objListado = new jdListado(null, true);
+        jdListar objListado = new jdListar(null, true);
         objListado.setLocationRelativeTo(null);
         objListado.setVisible(true);
     }//GEN-LAST:event_btnListarDatosActionPerformed

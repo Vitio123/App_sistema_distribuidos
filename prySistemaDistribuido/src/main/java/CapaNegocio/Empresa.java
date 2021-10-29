@@ -3,6 +3,8 @@ package CapaNegocio;
 import CapaDatos.conexion;
 import CapaNegocio.Entidades.EntidadEmpresa;
 import java.sql.ResultSet;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,6 +33,34 @@ public class Empresa extends EntidadEmpresa{
             throw new Exception(e.getMessage());
         }
         return rpt;
+    }
+    
+    public void listarEmpresa(JTable tblListado) throws Exception {
+        try {
+            SQL = "select e.empresa_id, e.nombre_empresa, e.tipo_empresa, e.ruc, pa.nombre_pais from dbo.Empresa as e inner join dbo.Pais as pa on pa.pais_id = e.pais_pais_id order by 2, 3 asc";
+            rs = objC.consultarBD(SQL);
+            
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("ID");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Tipo");
+            modelo.addColumn("RUC");
+            modelo.addColumn("Pais");
+            
+            tblListado.setModel(modelo);
+            
+            while(rs.next()){
+                Object datos[] = new Object[modelo.getColumnCount()];
+                for (int i = 0; i < datos.length; i++) {
+                    datos[i] = rs.getString(i+1);
+                }
+                
+                modelo.addRow(datos);
+            }            
+            objC.desconectarBD();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
     
 
