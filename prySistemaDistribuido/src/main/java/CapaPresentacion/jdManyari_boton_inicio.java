@@ -5,20 +5,31 @@
  */
 package CapaPresentacion;
 
+import CapaNegocio.Entidades.EntidadPostulante;
+import CapaNegocio.Postulante;
+import static CapaPresentacion.jdMenu.obtenerFecha;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nickb
  */
 public class jdManyari_boton_inicio extends javax.swing.JDialog {
 
+    public static int id_postulante;
+    
     /**
      * Creates new form jdManyari_boton_inicio
      */
     public jdManyari_boton_inicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        lblFecha.setText(obtenerFecha());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,16 +51,14 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtPostulanteSesion = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        lblHora = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblNombrePostulante = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAreaDescripcion = new javax.swing.JTextArea();
         btnModificarPostulante = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -57,6 +66,12 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
         btnModificarPostulante1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("INICIO_POSTULANTE");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 23, 96)));
 
@@ -177,13 +192,9 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
 
         jLabel4.setText("POSTULANTE:");
 
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtPostulanteSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel6.setText("FECHA:");
-
-        jLabel8.setText("HORA:");
-
-        lblHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -195,16 +206,12 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPostulanteSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,11 +220,9 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                        .addComponent(lblHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtPostulanteSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -226,14 +231,14 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/postulante.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Usuario");
+        lblNombrePostulante.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNombrePostulante.setText("Usuario");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Descripcion del usuario");
-        jScrollPane2.setViewportView(jTextArea1);
+        txtAreaDescripcion.setEditable(false);
+        txtAreaDescripcion.setColumns(20);
+        txtAreaDescripcion.setRows(5);
+        txtAreaDescripcion.setText("Descripcion del usuario");
+        jScrollPane2.setViewportView(txtAreaDescripcion);
 
         btnModificarPostulante.setBackground(new java.awt.Color(0, 117, 196));
         btnModificarPostulante.setFont(new java.awt.Font("Arial Black", 1, 17)); // NOI18N
@@ -262,7 +267,7 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(124, 124, 124)
-                                .addComponent(jLabel2))
+                                .addComponent(lblNombrePostulante))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(57, 57, 57)
                                 .addComponent(btnModificarPostulante)))
@@ -275,7 +280,7 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblNombrePostulante)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -356,8 +361,10 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        Manyari_boton_notificaciones obj= new Manyari_boton_notificaciones();
-        obj.setVisible(true);
+        jdManyari_boton_notificaciones m = new jdManyari_boton_notificaciones(null, true);
+        jdManyari_boton_notificaciones.id_postulante = id_postulante;
+        m.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -375,6 +382,27 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarPostulante1ActionPerformed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        cargarDatosPostulante();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void cargarDatosPostulante(){
+        try {
+            Postulante objPostulante = new Postulante();
+            objPostulante.setPostulante_id(id_postulante);
+            EntidadPostulante entidadPostulante = objPostulante.consultarPostulante();
+            lblNombrePostulante.setText(entidadPostulante.getNombres());
+            txtAreaDescripcion.setText("Apellido parterno: "+entidadPostulante.getApellido_paterno()+"\n"+
+                                       "Apellido materno: "+entidadPostulante.getApellido_materno()+"\n"+
+                                       "N° documento: "+entidadPostulante.getNumero_documento()+"\n"+
+                                       "N° colegiatura"+entidadPostulante.getNumero_colegiatura()+"\n");
+            txtPostulanteSesion.setText(entidadPostulante.getNombres()+" "+entidadPostulante.getApellido_paterno()+
+                    " "+entidadPostulante.getApellido_materno());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -427,11 +455,8 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -442,8 +467,9 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblFecha;
-    private javax.swing.JLabel lblHora;
+    private javax.swing.JLabel lblNombrePostulante;
+    private javax.swing.JTextArea txtAreaDescripcion;
+    private javax.swing.JLabel txtPostulanteSesion;
     // End of variables declaration//GEN-END:variables
 }

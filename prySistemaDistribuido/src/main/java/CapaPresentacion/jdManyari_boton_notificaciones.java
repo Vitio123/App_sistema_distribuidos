@@ -5,18 +5,25 @@
  */
 package CapaPresentacion;
 
+import CapaNegocio.Entidades.EntidadPostulante;
+import CapaNegocio.Postulante;
+import static CapaPresentacion.jdManyari_boton_inicio.id_postulante;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nickb
  */
 public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
 
+    public static int id_postulante;
     /**
      * Creates new form jdManyari_boton_notificaciones
      */
     public jdManyari_boton_notificaciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
@@ -40,7 +47,7 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtPostulanteSesion = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
@@ -52,6 +59,11 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 23, 96)));
 
@@ -177,7 +189,7 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
 
         jLabel4.setText("POSTULANTE:");
 
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtPostulanteSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel6.setText("FECHA:");
 
@@ -195,8 +207,8 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
+                .addComponent(txtPostulanteSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,7 +227,7 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
                     .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPostulanteSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                         .addComponent(lblHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -289,10 +301,28 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jdManyari_boton_buscar m = new jdManyari_boton_buscar(null, true);
-        m.setVisible(true);
+        jdMenuEm obj = new jdMenuEm(null,true);
+        obj.setLocationRelativeTo(null);
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        cargarDatosPostulante();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void cargarDatosPostulante(){
+        try {
+            Postulante objPostulante = new Postulante();
+            objPostulante.setPostulante_id(id_postulante);
+            EntidadPostulante entidadPostulante = objPostulante.consultarPostulante();
+            txtPostulanteSesion.setText(entidadPostulante.getNombres()+" "+entidadPostulante.getApellido_paterno()+
+                    " "+entidadPostulante.getApellido_materno());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -343,7 +373,6 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -358,5 +387,6 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblHora;
+    private javax.swing.JLabel txtPostulanteSesion;
     // End of variables declaration//GEN-END:variables
 }

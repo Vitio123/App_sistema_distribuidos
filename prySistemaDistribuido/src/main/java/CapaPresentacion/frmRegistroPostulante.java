@@ -1028,6 +1028,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                         objEL.setCargo(tblListadoExpe.getValueAt(i, 4).toString());
                         objEL.insertarExperiencia(tblListadoExpe.getValueAt(i, 0).toString(), tblListadoExpe.getValueAt(i, 1).toString());
                         JOptionPane.showMessageDialog(this, "Se registró la experiencia laboral");
+                        jdManyari_boton_inicio.id_postulante = idpostulante;
                         dispose();
                         new frmInicioSesion().setVisible(true);
                     }

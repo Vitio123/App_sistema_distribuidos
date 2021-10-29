@@ -148,6 +148,6 @@ public class Postulante extends EntidadPostulante {
             throw new Exception(e.getMessage());
         }
     }
-
+    
 }
 

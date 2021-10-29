@@ -233,8 +233,8 @@ public class frmInicioSesion extends javax.swing.JFrame {
                     }
                     if(rpt>0){
                         if(cbotipo.getSelectedIndex()==0){
-                            Manyari_boton_inicio.idPostulante=rpt;
-                            Manyari_boton_inicio obj = new Manyari_boton_inicio();
+                            jdManyari_boton_inicio obj = new jdManyari_boton_inicio(this, true);
+                            jdManyari_boton_inicio.id_postulante = rpt;
                             obj.setVisible(true);
                         }else{
                             frmEmpresaInicio.idPostulante=rpt;
