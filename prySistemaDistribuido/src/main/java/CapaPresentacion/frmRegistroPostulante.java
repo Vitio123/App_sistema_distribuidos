@@ -365,7 +365,7 @@ public class frmRegistroPostulante extends javax.swing.JFrame {
                     .addComponent(cboDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSiguientePostulante)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelPostulante, "card5");

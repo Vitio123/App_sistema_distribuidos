@@ -7,7 +7,7 @@ package CapaNegocio.Entidades;
 public class EntidadEmpresa {
     
     private int empresa_id, pais_id;
-    private String nombre_empresa, tipo_empresa, ruc;
+    private String nombre_empresa, tipo_empresa, ruc ,contraseña;
     
     public EntidadEmpresa(){
         
@@ -59,6 +59,14 @@ public class EntidadEmpresa {
 
     public void setRuc(String ruc) {
         this.ruc = ruc;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
     
     @Override

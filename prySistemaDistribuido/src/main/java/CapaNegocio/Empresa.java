@@ -85,5 +85,18 @@ public class Empresa extends EntidadEmpresa{
         }
     }
     
-
+    public int registrarEmpresa() throws Exception {
+        try {
+            SQL = "insert into dbo.Empresa(nombre_empresa , tipo_empresa, ruc,pais_pais_id,contraseña) values('" + super.getNombre_empresa() + "', '" + super.getTipo_empresa() + "', '" + super.getRuc() + "', '" + super.getPais_id() + "', '" + super.getContraseña()+ "')";
+            objC.ejecutarBD(SQL);
+            rs = objC.consultarBD("select SCOPE_IDENTITY()");
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            objC.desconectarBD();
+            return 0;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }
