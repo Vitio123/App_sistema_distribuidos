@@ -329,7 +329,9 @@ public class jdMenuPost extends javax.swing.JDialog implements Runnable{
     }//GEN-LAST:event_btnListarDatos1ActionPerformed
 
     private void btnListarDatos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarDatos2ActionPerformed
-        // TODO add your handling code here:
+        jdListarIdiomasParaEm objListado = new jdListarIdiomasParaEm(null, true);
+        objListado.setLocationRelativeTo(null);
+        objListado.setVisible(true);
     }//GEN-LAST:event_btnListarDatos2ActionPerformed
 
     /**
