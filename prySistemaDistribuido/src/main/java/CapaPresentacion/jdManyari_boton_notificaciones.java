@@ -297,12 +297,14 @@ public class jdManyari_boton_notificaciones extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jdManyari_boton_inicio m = new jdManyari_boton_inicio(null, true);
+        jdManyari_boton_inicio.id_postulante = id_postulante;
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jdMenuEm obj = new jdMenuEm(null,true);
+        jdMenuEm.id_postulante = id_postulante;
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         dispose();

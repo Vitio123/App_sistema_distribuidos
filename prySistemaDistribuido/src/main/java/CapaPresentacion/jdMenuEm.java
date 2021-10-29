@@ -5,11 +5,15 @@
  */
 package CapaPresentacion;
 
+import CapaNegocio.Entidades.EntidadPostulante;
+import CapaNegocio.Postulante;
+import static CapaPresentacion.jdManyari_boton_inicio.id_postulante;
 import static CapaPresentacion.jdMenuPost.obtenerFecha;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +23,8 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
 
     String hor, min, seg;
     Thread hiloHora;
+    public static int id_postulante;
+    
     /**
      * Creates new form jdMenuEm
      */
@@ -77,7 +83,7 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
         jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        txtPostulanteSesion = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
@@ -234,7 +240,7 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
 
         jLabel6.setText("USUARIO:");
 
-        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtPostulanteSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel8.setText("FECHA:");
 
@@ -248,7 +254,7 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPostulanteSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
@@ -268,7 +274,7 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
                     .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPostulanteSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                         .addComponent(lblHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -304,13 +310,15 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNotificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotificacionesActionPerformed
-        frmEmpresaNotificaciones obj= new frmEmpresaNotificaciones();
+        jdManyari_boton_notificaciones obj= new jdManyari_boton_notificaciones(null, true);
+        jdManyari_boton_inicio.id_postulante = id_postulante;
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNotificacionesActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
         jdManyari_boton_inicio obj= new jdManyari_boton_inicio(null, true);
+        jdManyari_boton_inicio.id_postulante = id_postulante;
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnInicioActionPerformed
@@ -321,6 +329,18 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
         
     }//GEN-LAST:event_btnListarDatosActionPerformed
 
+    private void cargarDatosPostulante(){
+        try {
+            Postulante objPostulante = new Postulante();
+            objPostulante.setPostulante_id(id_postulante);
+            EntidadPostulante entidadPostulante = objPostulante.consultarPostulante();
+            txtPostulanteSesion.setText(entidadPostulante.getNombres()+" "+entidadPostulante.getApellido_paterno()+
+                    " "+entidadPostulante.getApellido_materno());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -372,7 +392,6 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -383,5 +402,6 @@ public class jdMenuEm extends javax.swing.JDialog implements Runnable{
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblHora;
     private javax.swing.JPanel panelListarDatos;
+    private javax.swing.JLabel txtPostulanteSesion;
     // End of variables declaration//GEN-END:variables
 }

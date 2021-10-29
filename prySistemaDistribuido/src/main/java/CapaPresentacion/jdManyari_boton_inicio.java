@@ -109,6 +109,11 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
 
         jButton3.setBackground(new java.awt.Color(0, 117, 196));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home_rm.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel19.setText("INICIO");
 
@@ -369,6 +374,7 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jdMenuEm obj = new jdMenuEm(null,true);
+        jdMenuEm.id_postulante = id_postulante;
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         dispose();
@@ -385,6 +391,10 @@ public class jdManyari_boton_inicio extends javax.swing.JDialog {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         cargarDatosPostulante();
     }//GEN-LAST:event_formWindowActivated
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cargarDatosPostulante(){
         try {
