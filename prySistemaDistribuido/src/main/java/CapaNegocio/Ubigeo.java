@@ -25,7 +25,7 @@ public class Ubigeo extends EntidadUbigeo{
             rs = objC.consultarBD(SQL);
             if (rs.next()) {
                 return rs.getInt(1);
-            }
+            }objC.desconectarBD();
             return -1;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -39,7 +39,7 @@ public class Ubigeo extends EntidadUbigeo{
             ArrayList<String> departamentos = new ArrayList<String>();
             while(rs.next()){
                 departamentos.add(rs.getString(1));
-            }
+            }objC.desconectarBD();
             return departamentos;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -53,7 +53,7 @@ public class Ubigeo extends EntidadUbigeo{
             ArrayList<String> provincias = new ArrayList<String>();
             while(rs.next()){
                 provincias.add(rs.getString(1));
-            }
+            }objC.desconectarBD();
             return provincias;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -67,7 +67,7 @@ public class Ubigeo extends EntidadUbigeo{
             ArrayList<String> distritos = new ArrayList<String>();
             while(rs.next()){
                 distritos.add(rs.getString(1));
-            }
+            }objC.desconectarBD();
             return distritos;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

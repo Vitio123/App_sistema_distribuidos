@@ -30,7 +30,7 @@ public class CategoriaProfesion extends EntidadCategoriaProfesion{
                 objECP.setCategoria_id(rs.getInt(1));
                 objECP.setDescripcion(rs.getString(2));
                 categorias.add(objECP);
-            }
+            }objC.desconectarBD();
             return categorias;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

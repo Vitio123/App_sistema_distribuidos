@@ -288,11 +288,13 @@ public class Manyari_boton_notificaciones extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
          Manyari_boton_inicio obj= new Manyari_boton_inicio();
         obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Manyari_boton_buscar obj= new Manyari_boton_buscar();
         obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
